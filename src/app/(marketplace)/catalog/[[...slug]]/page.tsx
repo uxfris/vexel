@@ -97,7 +97,7 @@ export default async function CatalogPage({
   const data = await getItemsByCategory(slug);
   return (
     <>
-      <Header category={data[0]?.category || ""} />
+      <Header category={slug ? data[0]?.category : ""} />
       <PluginCard />
     </>
   );

@@ -1,6 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import PluginCard from "../components/PluginCard";
+import Breadcrumb from "./Breadrumb";
 
 const tags = [
   {
@@ -17,11 +17,7 @@ const Header = ({ category }: { category: string }) => {
   return (
     <>
       <div className="h-15"></div>
-      <div className="text-md font-semibold flex items-center gap-2">
-        <span className="cursor-pointer">Vexel</span>→
-        <span className="cursor-pointer">Plugins</span>→
-        <span className="font-medium text-muted-foreground">{category}</span>
-      </div>
+      <Breadcrumb category={category} />
       <h1 className="text-3xl md:text-5xl font-bold py-5">{category}</h1>
       <p className="text-md font-medium text-muted-foreground pb-5">
         Discover the best animation plugins for your projects.
