@@ -9,37 +9,48 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { useSidebar } from "../context/SidebarContext";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const categories = [
   {
     id: 1,
     icon: <StarIcon />,
     name: "Featured",
+    slug: "featured",
   },
   {
     id: 2,
     icon: <VideoIcon />,
     name: "Animation",
+    slug: "animation",
   },
   {
     id: 3,
     icon: <TextIcon />,
     name: "Text & Typography",
+    slug: "text-typography",
   },
   {
     id: 4,
     icon: <SparklesIcon />,
     name: "VFX & Particles",
+    slug: "vfx-particles",
   },
   {
     id: 5,
     icon: <PaletteIcon />,
     name: "Color & Grading",
+    slug: "color-grading",
   },
 ];
 
 const Sidebar = () => {
+  const pathname = usePathname();
+  const activeSlug = pathname.split("/").pop();
+
   const { open } = useSidebar();
+
   return (
     <aside
       className={cn(
@@ -52,11 +63,12 @@ const Sidebar = () => {
       </h5>
       <div className="flex flex-col space-y-2">
         {categories.map((category) => (
-          <div
+          <Link
             key={category.id}
+            href={`/catalog/${category.slug}`}
             className={cn(
               "flex items-center gap-3 pl-0 rounded-md cursor-pointer hover:bg-sidebar-primary transition-colors duration-200",
-              category.id === 1
+              activeSlug === category.slug
                 ? "bg-sidebar-primary text-sidebar-primary-foreground"
                 : ""
             )}
@@ -65,7 +77,7 @@ const Sidebar = () => {
               {category.icon}
             </div>
             <p className="text-sm font-medium">{category.name}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </aside>

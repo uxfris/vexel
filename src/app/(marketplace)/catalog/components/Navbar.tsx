@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { useSidebar } from "../context/SidebarContext";
 
-const Header = () => {
+const Navbar = () => {
   const { open, toggle } = useSidebar();
   return (
     <header className="border-b border-border bg-background sticky top-0 z-50">
@@ -89,4 +89,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;
