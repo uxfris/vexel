@@ -1,5 +1,10 @@
+import { Search, X } from "lucide-react";
 import Header from "../components/header";
 import PluginCard from "../components/plugin-card";
+import { Input } from "@/components/ui/input";
+import { PLUGIN_CATEGORIES } from "@/lib/utils/constants";
+import Link from "next/link";
+import SearchPlugin from "../components/search-plugin";
 
 const mock = {
   featured: [
@@ -75,7 +80,6 @@ const mock = {
   ],
 };
 type CategoryKey = keyof typeof mock;
-// hasilnya: "featured" | "animation" | "text-typography" | "all"
 
 async function getItemsByCategory(slug?: string) {
   const isCategory = (value: any): value is CategoryKey =>
@@ -113,6 +117,7 @@ export default async function CatalogPage({
         activeSubCategories={subCategories}
       />
       <PluginCard />
+      <SearchPlugin />
     </>
   );
 }

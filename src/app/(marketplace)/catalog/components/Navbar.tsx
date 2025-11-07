@@ -11,11 +11,24 @@ import {
   UserIcon,
   XIcon,
 } from "lucide-react";
-import { useSidebar } from "../context/SidebarContext";
-import { Input } from "@/components/ui/input";
+import { useSidebar } from "../context/sidebar-context";
+import { useSearch } from "../context/search-context";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const { open, toggle } = useSidebar();
+  const { searchToggle } = useSearch();
+
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        searchToggle();
+      }
+    };
+    window.addEventListener("keydown", handleKeydown);
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, []);
   return (
     <header className="border-b border-border bg-background sticky top-0 z-50">
       <div className="flex items-center justify-between px-4 py-2">
@@ -33,7 +46,13 @@ const Navbar = () => {
             )}
           </Button>
           <Link href="/">
-            <Image src="/images/logo.svg" alt="Vexel" width={80} height={80} />
+            <Image
+              src="/images/logo.svg"
+              alt="Vexel"
+              width={80}
+              height={80}
+              className="w-20 md:w-8"
+            />
           </Link>
           <nav className="hidden md:flex items-center gap-8">
             <Link
@@ -48,20 +67,21 @@ const Navbar = () => {
             >
               Creators
             </Link>
-            <div className="hidden md:flex items-center gap-2">
+            <button
+              onClick={searchToggle}
+              className="hidden md:flex items-center gap-2 cursor-pointer"
+            >
               <SearchIcon className="w-4 h-4 text-muted-foreground" />
               <div className="flex items-center gap-1 bg-muted rounded-md px-2 py-1 text-muted-foreground">
                 <span className="text-sm font-medium">⌘</span>
                 <span className="text-sm font-medium">K</span>
               </div>
-            </div>
+            </button>
           </nav>
         </div>
         <button
-          onClick={() => {
-            console.log("search clicked");
-          }}
-          className="w-full md:hidden cursor-pointer flex items-center bg-input rounded-full mx-4 px-4 py-2 text-muted-foreground"
+          onClick={searchToggle}
+          className="w-full md:hidden cursor-pointer flex items-center bg-input rounded-full border border-border mx-4 px-4 py-2 text-muted-foreground"
         >
           <span className="text-sm font-medium text-muted-foreground">
             Search Plugins

@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import Breadcrumb from "./Breadrumb";
+import Breadcrumb from "./breadrumb";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils/cn";
 import { useRouter } from "next/navigation";

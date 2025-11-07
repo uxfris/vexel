@@ -1,49 +1,10 @@
 "use client";
 
-import {
-  PaletteIcon,
-  SparklesIcon,
-  StarIcon,
-  TextIcon,
-  VideoIcon,
-} from "lucide-react";
 import { cn } from "@/lib/utils/cn";
-import { useSidebar } from "../context/SidebarContext";
+import { useSidebar } from "../context/sidebar-context";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-
-const categories = [
-  {
-    id: 1,
-    icon: <StarIcon />,
-    name: "Featured",
-    slug: "featured",
-  },
-  {
-    id: 2,
-    icon: <VideoIcon />,
-    name: "Animation",
-    slug: "animation",
-  },
-  {
-    id: 3,
-    icon: <TextIcon />,
-    name: "Text & Typography",
-    slug: "text-typography",
-  },
-  {
-    id: 4,
-    icon: <SparklesIcon />,
-    name: "VFX & Particles",
-    slug: "vfx-particles",
-  },
-  {
-    id: 5,
-    icon: <PaletteIcon />,
-    name: "Color & Grading",
-    slug: "color-grading",
-  },
-];
+import { PLUGIN_CATEGORIES } from "@/lib/utils/constants";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -62,7 +23,7 @@ const Sidebar = () => {
         CATALOG
       </h5>
       <div className="flex flex-col space-y-2">
-        {categories.map((category) => (
+        {PLUGIN_CATEGORIES.map((category) => (
           <Link
             key={category.id}
             href={`/catalog/${category.slug}`}
