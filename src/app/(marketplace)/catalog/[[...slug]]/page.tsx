@@ -1,5 +1,5 @@
-import Header from "../components/Header";
-import PluginCard from "../components/PluginCard";
+import Header from "../components/header";
+import PluginCard from "../components/plugin-card";
 
 const mock = {
   featured: [
@@ -90,14 +90,28 @@ async function getItemsByCategory(slug?: string) {
 
 export default async function CatalogPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug?: string[] }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const slug = (await params).slug?.[0];
-  const data = await getItemsByCategory(slug);
+  const { slug } = await params;
+  const resolveSearchParams = await searchParams;
+  const slugValue = slug?.[0];
+  console.log(slugValue);
+
+  const data = await getItemsByCategory(slugValue);
+
+  const subCategories =
+    typeof resolveSearchParams.subCategories === "string"
+      ? resolveSearchParams.subCategories?.split(",")
+      : [];
   return (
     <>
-      <Header category={slug ? data[0]?.category : ""} />
+      <Header
+        category={slug ? data[0]?.category : ""}
+        activeSubCategories={subCategories}
+      />
       <PluginCard />
     </>
   );

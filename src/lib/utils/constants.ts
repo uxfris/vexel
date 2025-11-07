@@ -28,3 +28,14 @@ export const MAX_VIDEO_SIZE = 100 * 1024 * 1024; // 100MB
 export const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
 
 export const PLATFORM_FEE_PERCENTAGE = 0.15; // 15% commission
+
+export const pricingOptions = [
+  { label: "Paid + Free", value: "paid_free" },
+  { label: "Paid", value: "paid" },
+  { label: "Free", value: "free" },
+];
+
+export const sortOptions = [
+  { label: "Recent", value: "recent" },
+  { label: "Popular", value: "popular" },
+];

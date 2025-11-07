@@ -12,6 +12,7 @@ import {
   XIcon,
 } from "lucide-react";
 import { useSidebar } from "../context/SidebarContext";
+import { Input } from "@/components/ui/input";
 
 const Navbar = () => {
   const { open, toggle } = useSidebar();
@@ -32,7 +33,7 @@ const Navbar = () => {
             )}
           </Button>
           <Link href="/">
-            <Image src="/images/logo.svg" alt="Vexel" width={32} height={32} />
+            <Image src="/images/logo.svg" alt="Vexel" width={80} height={80} />
           </Link>
           <nav className="hidden md:flex items-center gap-8">
             <Link
@@ -47,7 +48,7 @@ const Navbar = () => {
             >
               Creators
             </Link>
-            <div className="flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-2">
               <SearchIcon className="w-4 h-4 text-muted-foreground" />
               <div className="flex items-center gap-1 bg-muted rounded-md px-2 py-1 text-muted-foreground">
                 <span className="text-sm font-medium">⌘</span>
@@ -56,6 +57,16 @@ const Navbar = () => {
             </div>
           </nav>
         </div>
+        <button
+          onClick={() => {
+            console.log("search clicked");
+          }}
+          className="w-full md:hidden cursor-pointer flex items-center bg-input rounded-full mx-4 px-4 py-2 text-muted-foreground"
+        >
+          <span className="text-sm font-medium text-muted-foreground">
+            Search Plugins
+          </span>
+        </button>
         <div className="flex items-center gap-8">
           <Link href="/sell" className="hidden md:block">
             <p className="text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer">

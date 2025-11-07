@@ -1,19 +1,69 @@
+"use client";
+
 import { ChevronDown } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import Breadcrumb from "./Breadrumb";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils/cn";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import FilterDropdown from "@/components/ui/filter-dropdown";
+import { pricingOptions, sortOptions } from "@/lib/utils/constants";
+import { updateQueryParam } from "@/lib/utils/queryparams";
 
 const tags = [
   {
     id: "1",
     name: "Animation",
+    slug: "animation",
   },
   {
     id: "2",
     name: "Text",
+    slug: "text",
   },
 ];
 
-const Header = ({ category }: { category: string }) => {
+interface HeaderProps {
+  category: string;
+  activeSubCategories: string[];
+}
+
+const Header = ({ category, activeSubCategories }: HeaderProps) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const [activeTags, setActiveTags] = useState<string[]>(activeSubCategories);
+
+  useEffect(() => {
+    const current = searchParams.get("subcategories");
+
+    setActiveTags(current ? current.split(",") : []);
+  }, [searchParams]);
+
+  const handleClick = (tagId: string) => {
+    const current = searchParams.get("subcategories");
+    const selected = current ? current.split(",") : [];
+
+    let newTags = selected.includes(tagId)
+      ? selected.filter((id) => id != tagId)
+      : [...selected, tagId];
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (newTags.length > 0) params.set("subcategories", newTags.join(","));
+    else params.delete("subcategories");
+    router.push(`?${params.toString()}`);
+
+    setActiveTags(newTags);
+  };
+
+  const clearAll = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("subcategories");
+    router.push(`?${params.toString()}`);
+    setActiveTags([]);
+  };
+
   return (
     <>
       <div className="h-15"></div>
@@ -24,25 +74,47 @@ const Header = ({ category }: { category: string }) => {
       </p>
       <div className="wrap space-x-2">
         {tags.map((tag) => (
-          <Badge
+          <Button
             key={tag.id}
+            onClick={() => handleClick(tag.id)}
             variant={"outline"}
-            className="shadow-xs py-2 px-4"
+            className={cn(
+              "shadow-xs py-2 px-4 text-sm rounded-full",
+              activeTags.includes(tag.id)
+                ? "border-blue-600 text-blue-600 hover:text-blue-600"
+                : ""
+            )}
           >
-            <p className="text-sm text-muted-foreground"> {tag.name} </p>
-          </Badge>
+            <p> {tag.name} </p>
+          </Button>
         ))}
+        {activeTags.length > 0 && (
+          <Button
+            onClick={clearAll}
+            variant="outline"
+            className="shadow-xs py-2 px-4 text-sm rounded-full"
+          >
+            <p className="text-muted-foreground-secondary">Clear all</p>
+          </Button>
+        )}
       </div>
       <div className="mt-10">
         <div className="flex gap-4 items-center justify-between">
-          <div className="flex items-center gap-1">
-            <p className="text-2xl font-bold">Recent</p>
-            <ChevronDown className="w-6 h-6" />
-          </div>
-          <div className="flex items-center gap-1">
-            <p className="text-sm font-bold">Paid + Free</p>
-            <ChevronDown className="w-6 h-6" />
-          </div>
+          <FilterDropdown
+            options={sortOptions}
+            defaultValue="Recent"
+            onChange={(value) =>
+              updateQueryParam(router, searchParams, "sort", value)
+            }
+          />
+          <FilterDropdown
+            options={pricingOptions}
+            defaultValue="Paid + Free"
+            buttonClassName="text-sm"
+            onChange={(value) =>
+              updateQueryParam(router, searchParams, "pricing", value)
+            }
+          />
         </div>
         <div className="h-px border-b border-border mt-3 mb-6"></div>
       </div>
