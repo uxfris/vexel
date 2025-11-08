@@ -27,7 +27,7 @@ const Sidebar = () => {
   return (
     <aside
       className={cn(
-        "sticky top-0 self-start z-50 h-screen md:flex flex-col p-4 border-r border-border w-64 overflow-visible",
+        "sticky top-0 self-start z-50 h-screen md:flex flex-col p-4 border-r border-border w-64 overflow-y-auto",
         open ? "block fixed top-14 left-0 z-50 w-full bg-background" : "hidden"
       )}
     >
