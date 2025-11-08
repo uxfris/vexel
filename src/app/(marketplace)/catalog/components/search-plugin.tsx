@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Search, X } from "lucide-react";
+import { ArrowRight, Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { PLUGINS, PLUGIN_CATEGORIES } from "@/lib/utils/constants";
 import Link from "next/link";
@@ -9,13 +9,13 @@ import { useSearch } from "../context/search-context";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 import Image from "next/image";
-import { Skeleton } from "@/components/ui/skeleteon";
 import Spinner from "@/components/ui/spinner";
 import { useDebounce } from "@/lib/hooks/useDebounce";
 
 const SearchPlugin = () => {
   const { open, close } = useSearch();
   const inputRef = useRef<HTMLInputElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -43,6 +43,28 @@ const SearchPlugin = () => {
     }
   }, [open]);
 
+  // Close when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        close();
+      }
+    }
+
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open, close]);
+
   return (
     <AnimatePresence>
       {open && (
@@ -53,6 +75,7 @@ const SearchPlugin = () => {
           exit={{ opacity: 0 }}
         >
           <motion.div
+            ref={modalRef}
             className={cn(
               "w-full md:mt-20 md:max-w-lg bg-white md:rounded-2xl shadow-xl flex flex-col  overflow-hidden h-full",
               PLUGINS.length > 0 ? "md:h-[70vh]" : "md:h-auto"
@@ -74,7 +97,8 @@ const SearchPlugin = () => {
               />{" "}
               <button onClick={close} className="cursor-pointer">
                 {" "}
-                <X className="w-5 h-5 text-muted-foreground" />{" "}
+                <X className="md:hidden w-5 h-5 text-muted-foreground" />{" "}
+                <ArrowRight className="hidden md:block text-muted-foreground-secondary border border-border rounded-lg p-1 w-12 h-8" />
               </button>{" "}
             </div>
             {/* Not Found State */}
