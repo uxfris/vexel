@@ -12,13 +12,22 @@ const PluginCard = () => {
           <div className="group flex flex-col">
             <div className=" relative">
               <Link href="/detail">
-                <Image
-                  src={plugin.images[0]}
-                  alt="Product Image"
-                  width={560}
-                  height={560}
-                  className="w-full h-full object-cover rounded-lg"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={plugin.images[0]}
+                    alt="Product Image"
+                    width={560}
+                    height={560}
+                    className="w-full h-full object-cover rounded-lg group-hover:opacity-0 duration-500 transition-opacity"
+                  />
+                  <Image
+                    src={plugin.images[1]}
+                    alt="Product Image"
+                    width={560}
+                    height={560}
+                    className="w-full h-full object-cover rounded-lg absolute top-0 left-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  />
+                </div>
               </Link>
               <div className="absolute top-2 right-2 flex gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <Button

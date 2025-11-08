@@ -5,12 +5,24 @@ import { useSidebar } from "../context/sidebar-context";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { PLUGIN_CATEGORIES } from "@/lib/utils/constants";
+import { useEffect } from "react";
 
 const Sidebar = () => {
   const pathname = usePathname();
   const activeSlug = pathname.split("/").pop();
 
   const { open } = useSidebar();
+
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add("overflow-hidden");
+      return () => {
+        document.body.classList.remove("overflow-hidden");
+      };
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [open]);
 
   return (
     <aside

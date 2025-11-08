@@ -44,3 +44,14 @@ export function generateLicenseKey(): string {
     ).join("")
   ).join("-");
 }
+
+export function formatLabel(
+  segment: string,
+  labelMap?: Record<string, string>
+) {
+  // Check for custom label first
+  const label = labelMap?.[segment] || segment.replace(/-/g, " ");
+
+  // Capitalize each word
+  return label.replace(/\b\w/g, (l) => l.toUpperCase());
+}
