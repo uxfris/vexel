@@ -67,7 +67,7 @@ const Header = ({ category, activeSubCategories }: HeaderProps) => {
   return (
     <>
       <div className="h-15"></div>
-      <Breadcrumb category={category} />
+      <Breadcrumb />
       <h1 className="text-3xl md:text-5xl font-bold py-5">{category}</h1>
       <p className="text-md font-medium text-muted-foreground pb-5">
         Discover the best animation plugins for your projects.

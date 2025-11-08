@@ -8,7 +8,7 @@ const CatalogLayout = ({ children }: { children: React.ReactNode }) => {
     <SidebarProvider>
       <SearchProvider>
         <Navbar />
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-1">
           <Sidebar />
           <main className="flex-1 max-w-[1440px] overflow-auto p-4 md:p-12">
             {children}
