@@ -30,7 +30,7 @@ const Navbar = () => {
     return () => window.removeEventListener("keydown", handleKeydown);
   }, []);
   return (
-    <header className="border-b border-border bg-background sticky top-0 z-50">
+    <header className="border-b border-border bg-background">
       <div className="flex items-center justify-between px-4 py-2">
         <div className="flex items-center gap-2 md:gap-8">
           <Button
