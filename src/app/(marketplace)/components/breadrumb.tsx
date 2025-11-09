@@ -18,7 +18,7 @@ export default function Breadcrumb() {
   // Capitalize helper
 
   return (
-    <nav className="text-sm font-medium text-muted-foreground">
+    <nav className="font-semibold text-muted-foreground">
       <ol className="flex items-center gap-2">
         <li>
           <Link
@@ -35,7 +35,7 @@ export default function Breadcrumb() {
 
           return (
             <li key={href} className="flex items-center gap-2">
-              <ChevronRight className="w-4 h-4 text-muted-foreground" />
+              →
               {isLast ? (
                 <span className="text-muted-foreground">
                   {formatLabel(segment, labelMap)}
@@ -44,7 +44,7 @@ export default function Breadcrumb() {
                 <Link
                   href={href}
                   className={cn(
-                    "hover:text-primary transition",
+                    "text-primary",
                     isLast && "text-muted-foreground cursor-text"
                   )}
                 >

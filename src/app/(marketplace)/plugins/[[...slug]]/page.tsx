@@ -1,9 +1,11 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Breadcrumb from "../../components/breadrumb";
+import Link from "next/link";
+import { PluginDetail } from "../components/plugin-detail";
 
 interface PluginPageProps {
-  params: { slug: string };
+  params: Promise<{ slug?: string[] }>;
 }
 
 export async function generateMetaData({
@@ -22,11 +24,12 @@ export async function generateMetaData({
   };
 }
 export default async function PluginDetailPage({ params }: PluginPageProps) {
+  const { slug } = await params;
   // Mock data - replace with actual API call
   const plugin = {
     id: "1",
     title: "Smooth Animator Pro",
-    slug: params.slug,
+    slug: slug?.[0] ?? "default",
     shortDesc: "Create buttery smooth animations with advanced easing controls",
     description: `
   # About Smooth Animator Pro
@@ -62,10 +65,16 @@ export default async function PluginDetailPage({ params }: PluginPageProps) {
   - 4GB RAM minimum (8GB recommended)
   - 100MB free disk space
       `,
-    price: 49.99,
+    price: 55,
+    discount_price: 28,
     thumbnailUrl: "/placeholder-plugin.jpg",
     videoUrl: "https://example.com/demo.mp4",
-    demoImages: ["/demo1.jpg", "/demo2.jpg", "/demo3.jpg", "/demo4.jpg"],
+    demoImages: [
+      "https://cfw6.b-cdn.net/previews/818e38a8-0138-4c50-ae7a-753365fbf26d-02_1742766190817.webp",
+      "https://cfw6.b-cdn.net/previews/ca7ab7c4-9099-40ba-b13b-0c7883845b89-iphone-frame_1742802503135.webp",
+      "https://cfw6.b-cdn.net/previews/84b42ac3-1ed9-45e9-8af9-610f7cb7b090-04_1742766558968_(1).webp",
+      "https://cfw6.b-cdn.net/previews/c9c36871-4f8c-45b5-ae08-089d2bcb6461-05_1742766567063.webp",
+    ],
     category: "animation",
     tags: ["animation", "easing", "keyframes", "workflow"],
     aeVersions: ["2025", "2024", "2023", "2022"],
@@ -97,9 +106,15 @@ export default async function PluginDetailPage({ params }: PluginPageProps) {
   }
 
   return (
-    <div className="grid md:grid-cols-2">
+    <div className="mt-4">
       <Breadcrumb />
-      {/* <Image src={plugin.} alt={""}  /> */}
+      <h1 className="md:hidden text-3xl font-bold text-foreground mt-2">
+        {plugin.title}
+      </h1>
+      <p className="md:hidden font-medium text-md text-muted-foreground mt-2">
+        {plugin.shortDesc}
+      </p>
+      <PluginDetail plugin={plugin} />
     </div>
   );
 }
