@@ -3,20 +3,17 @@ import Navbar from "../components/navbar";
 import { SidebarProvider } from "../context/sidebar-context";
 import { SearchProvider } from "../context/search-context";
 
-const CatalogLayout = ({ children }: { children: React.ReactNode }) => {
+const Plugin = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider>
       <SearchProvider>
         <Navbar />
-        <div className="flex flex-1">
-          <Sidebar />
-          <main className="flex-1 max-w-[1440px] overflow-auto p-4 md:p-12">
-            {children}
-          </main>
-        </div>
+        <main className="max-w-[1440px] overflow-auto p-4 md:p-12">
+          {children}
+        </main>
       </SearchProvider>
     </SidebarProvider>
   );
 };
 
-export default CatalogLayout;
+export default Plugin;

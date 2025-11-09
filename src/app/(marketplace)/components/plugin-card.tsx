@@ -11,7 +11,7 @@ const PluginCard = () => {
         <div key={plugin.id} className="flex flex-col w-full">
           <div className="group flex flex-col">
             <div className=" relative">
-              <Link href="/detail">
+              <Link href={`/plugins/${plugin.slug}`}>
                 <div className="relative w-full h-full">
                   <Image
                     src={plugin.images[0]}
@@ -44,7 +44,7 @@ const PluginCard = () => {
                 </Button>
               </div>
             </div>
-            <Link href="/detail">
+            <Link href={`/plugins/${plugin.slug}`}>
               <div className="flex items-center justify-between">
                 <p className="font-bold text-xl mt-2"> {plugin.name} </p>
                 <p className="font-semibold text-muted-foreground-secondary">
@@ -52,7 +52,7 @@ const PluginCard = () => {
                 </p>
               </div>
             </Link>
-            <Link href="/detail">
+            <Link href={`/plugins/${plugin.slug}`}>
               <p className="text-muted-foreground-secondary font-medium mt-2">
                 {plugin.description}
               </p>

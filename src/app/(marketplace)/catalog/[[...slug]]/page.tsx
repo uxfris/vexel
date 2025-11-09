@@ -1,10 +1,10 @@
 import { Search, X } from "lucide-react";
-import Header from "../components/header";
-import PluginCard from "../components/plugin-card";
+import Header from "../../components/header";
+import PluginCard from "../../components/plugin-card";
 import { Input } from "@/components/ui/input";
 import { PLUGIN_CATEGORIES } from "@/lib/utils/constants";
 import Link from "next/link";
-import SearchPlugin from "../components/search-plugin";
+import SearchPlugin from "../../components/search-plugin";
 
 const mock = {
   featured: [

@@ -96,6 +96,7 @@ export const PLUGINS = [
     creator: "Creative Jim",
     category: "Animation",
     price: 100,
+    slug: "arc-easy-ease",
   },
   {
     id: 2,
@@ -109,6 +110,7 @@ export const PLUGINS = [
     creator: "Creative John",
     category: "Animation",
     price: 200,
+    slug: "shape-path-animation",
   },
   {
     id: 3,
@@ -122,6 +124,7 @@ export const PLUGINS = [
     creator: "Creative John",
     category: "Animation",
     price: 300,
+    slug: "shape-path-animation",
   },
   {
     id: 4,
@@ -135,6 +138,7 @@ export const PLUGINS = [
     creator: "Creative Jane",
     category: "Animation",
     price: 400,
+    slug: "vfx-particles",
   },
 ] as const;
 
