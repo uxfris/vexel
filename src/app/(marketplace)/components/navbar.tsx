@@ -13,11 +13,17 @@ import {
 } from "lucide-react";
 import { useSidebar } from "../context/sidebar-context";
 import { useSearch } from "../context/search-context";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import SearchPlugin from "./search-plugin";
+import { cn } from "@/lib/utils/cn";
+import { useMedia } from "use-media";
 
 const Navbar = () => {
+  const isMobile = useMedia({ maxWidth: 767 });
   const { open, toggle } = useSidebar();
   const { searchToggle } = useSearch();
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) => {
@@ -29,8 +35,41 @@ const Navbar = () => {
     window.addEventListener("keydown", handleKeydown);
     return () => window.removeEventListener("keydown", handleKeydown);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!isMobile) {
+        return;
+      }
+      const currentScrollY = window.scrollY;
+
+      // Always show navbar when at the top
+      if (currentScrollY < 10) {
+        setShowNavbar(true);
+      }
+      // Hide when scrolling down, show when scrolling up
+      else if (currentScrollY > lastScrollY) {
+        setShowNavbar(false);
+      } else if (currentScrollY < lastScrollY) {
+        setShowNavbar(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    // if (isMobile) {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // }
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isMobile, lastScrollY]);
   return (
-    <header className="border-b border-border bg-background">
+    <header
+      className={cn(
+        "w-full z-100 border-b border-border bg-background transition-all duration-500",
+        isMobile ? "fixed top-0 left-0 " : "",
+        showNavbar ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+      )}
+    >
       <div className="flex items-center justify-between px-4 py-2">
         <div className="flex items-center gap-2 md:gap-8">
           <Button
@@ -116,6 +155,7 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
+      <SearchPlugin />
     </header>
   );
 };
