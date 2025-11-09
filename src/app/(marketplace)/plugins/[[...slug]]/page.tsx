@@ -3,6 +3,7 @@ import Image from "next/image";
 import Breadcrumb from "../../components/breadrumb";
 import Link from "next/link";
 import { PluginDetail } from "../components/plugin-detail";
+import { notFound } from "next/navigation";
 
 interface PluginPageProps {
   params: Promise<{ slug?: string[] }>;
@@ -102,7 +103,7 @@ export default async function PluginDetailPage({ params }: PluginPageProps) {
   };
 
   if (!plugin) {
-    // notFound()
+    notFound();
   }
 
   return (
