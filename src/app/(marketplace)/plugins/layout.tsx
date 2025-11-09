@@ -8,7 +8,7 @@ const Plugin = ({ children }: { children: React.ReactNode }) => {
     <SidebarProvider>
       <SearchProvider>
         <Navbar />
-        <main className="max-w-[1440px] overflow-auto p-4 md:p-12">
+        <main className="w-full max-w-[1440px] mx-auto overflow-auto p-4 md:p-12">
           {children}
         </main>
       </SearchProvider>
