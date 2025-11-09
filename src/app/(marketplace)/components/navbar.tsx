@@ -96,11 +96,11 @@ const Navbar = () => {
           <Link href="/pricing" className="md:hidden">
             <Store className="w-5 h-5 text-muted-foreground hover:text-foreground cursor-pointer" />
           </Link>
-          <Link href="/pricing" className="hidden md:block">
+          {/* <Link href="/pricing" className="hidden md:block">
             <Button variant="outline" size="sm">
               <p className="text-sm font-medium">pricing</p>
             </Button>
-          </Link>
+          </Link> */}
 
           <Link href="/cart">
             <ShoppingCartIcon className="w-5 h-5 text-muted-foreground hover:text-foreground cursor-pointer" />
