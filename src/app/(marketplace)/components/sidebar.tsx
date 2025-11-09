@@ -7,7 +7,7 @@ import Link from "next/link";
 import { PLUGIN_CATEGORIES } from "@/lib/utils/constants";
 import { useEffect } from "react";
 
-const Sidebar = () => {
+const Sidebar = ({ isMobileOnly }: { isMobileOnly?: boolean }) => {
   const pathname = usePathname();
   const activeSlug = pathname.split("/").pop();
 
@@ -28,6 +28,7 @@ const Sidebar = () => {
     <aside
       className={cn(
         "sticky top-0 self-start z-50 h-screen md:flex flex-col p-4 border-r border-border w-64 overflow-y-auto",
+        isMobileOnly ? "md:hidden" : "",
         open ? "block fixed top-14 left-0 z-50 w-full bg-background" : "hidden"
       )}
     >
