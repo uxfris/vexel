@@ -1,9 +1,12 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import Breadcrumb from "../../components/breadrumb";
-import Link from "next/link";
 import { PluginDetail } from "../components/plugin-detail";
 import { notFound } from "next/navigation";
+import PluginCard from "../../components/plugin-card";
+import { PLUGINS } from "@/lib/utils/constants";
+import Divider from "@/components/ui/divider";
+import Footer from "../../../../components/ui/footer";
+import Sidebar from "../../components/sidebar";
 
 interface PluginPageProps {
   params: Promise<{ slug?: string[] }>;
@@ -75,6 +78,7 @@ export default async function PluginDetailPage({ params }: PluginPageProps) {
       "https://cfw6.b-cdn.net/previews/ca7ab7c4-9099-40ba-b13b-0c7883845b89-iphone-frame_1742802503135.webp",
       "https://cfw6.b-cdn.net/previews/84b42ac3-1ed9-45e9-8af9-610f7cb7b090-04_1742766558968_(1).webp",
       "https://cfw6.b-cdn.net/previews/c9c36871-4f8c-45b5-ae08-089d2bcb6461-05_1742766567063.webp",
+      "https://cfw6.b-cdn.net/previews/a63baa1f-c295-427f-a622-4e792ed12655-06_1742766575936_(1).jpg",
     ],
     category: "animation",
     tags: ["animation", "easing", "keyframes", "workflow"],
@@ -107,15 +111,26 @@ export default async function PluginDetailPage({ params }: PluginPageProps) {
   }
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 md:mt-0">
       <Breadcrumb />
       <h1 className="md:hidden text-3xl font-bold text-foreground mt-2">
         {plugin.title}
       </h1>
-      <p className="md:hidden font-medium text-md text-muted-foreground mt-2">
+      <p className="md:hidden font-medium text-md text-muted-foreground mt-2 mb-4">
         {plugin.shortDesc}
       </p>
       <PluginDetail plugin={plugin} />
+      <div className="mt-10">
+        <h4 className="text-xl md:text-2xl font-bold">You may like these</h4>
+        <Divider classNames=" mt-2 mb-4 md:mb-10" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-8 gap-y-10 md:gap-y-15 mb-15">
+          {PLUGINS.map((plugin) => (
+            <PluginCard key={plugin.id} plugin={plugin} />
+          ))}
+        </div>
+        <Footer />
+      </div>
+      <Sidebar isMobileOnly={true} />
     </div>
   );
 }

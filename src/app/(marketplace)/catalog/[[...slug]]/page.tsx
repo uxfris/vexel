@@ -1,10 +1,6 @@
-import { Search, X } from "lucide-react";
 import Header from "../../components/header";
 import PluginCard from "../../components/plugin-card";
-import { Input } from "@/components/ui/input";
-import { PLUGIN_CATEGORIES } from "@/lib/utils/constants";
-import Link from "next/link";
-import SearchPlugin from "../../components/search-plugin";
+import { PLUGINS, PLUGIN_CATEGORIES } from "@/lib/utils/constants";
 
 const mock = {
   featured: [
@@ -116,8 +112,11 @@ export default async function CatalogPage({
         category={slug ? data[0]?.category : ""}
         activeSubCategories={subCategories}
       />
-      <PluginCard />
-      <SearchPlugin />
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-8 gap-y-10 md:gap-y-15 mb-15">
+        {PLUGINS.map((plugin) => (
+          <PluginCard key={plugin.id} plugin={plugin} />
+        ))}
+      </div>
     </>
   );
 }

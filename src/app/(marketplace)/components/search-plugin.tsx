@@ -69,7 +69,7 @@ const SearchPlugin = () => {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 overscroll-none"
+          className="fixed inset-0 z-100 flex items-start justify-center bg-black/50 overscroll-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
