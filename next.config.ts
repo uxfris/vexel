@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "marketstorage.b-cdn.net",
       },
+      {
+        protocol: "https",
+        hostname: "cfw6.b-cdn.net",
+      },
     ],
   },
   experimental: {
