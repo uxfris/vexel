@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import SearchPlugin from "./search-plugin";
 import { cn } from "@/lib/utils/cn";
 import { useMedia } from "use-media";
+import Brand from "@/components/ui/brand";
 
 const Navbar = () => {
   const isMobile = useMedia({ maxWidth: 767 });
@@ -84,15 +85,7 @@ const Navbar = () => {
               <MenuIcon className="w-5 h-5" />
             )}
           </Button>
-          <Link href="/">
-            <Image
-              src="/images/logo.svg"
-              alt="Vexel"
-              width={80}
-              height={80}
-              className="w-20 md:w-8"
-            />
-          </Link>
+          <Brand className="w-20 md:w-8" />
           <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/"

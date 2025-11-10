@@ -4,6 +4,7 @@ import Link from "next/link";
 import Divider from "./divider";
 import Image from "next/image";
 import { SiX } from "@icons-pack/react-simple-icons";
+import Brand from "./brand";
 
 export default function Footer() {
   const navLinks = {
@@ -63,15 +64,7 @@ export default function Footer() {
       <Divider classNames="mt-12 mb-4" />
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <Link href="/">
-            <Image
-              src="/images/logo.svg"
-              alt="Vexel"
-              width={80}
-              height={80}
-              className="w-5"
-            />
-          </Link>
+          <Brand className="w-5" />
           <p className="text-sm font-medium">
             Vexel —{" "}
             <span className="text-muted-foreground">
