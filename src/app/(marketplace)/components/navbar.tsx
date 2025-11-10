@@ -11,10 +11,10 @@ import {
   UserIcon,
   XIcon,
 } from "lucide-react";
-import { useSidebar } from "../context/sidebar-context";
-import { useSearch } from "../context/search-context";
+import { useSidebar } from "../hooks/useSidebar";
+import { useSearch } from "../hooks/useSearch";
 import { useEffect, useState } from "react";
-import SearchPlugin from "./search-plugin";
+import SearchPlugin from "./searchPlugin";
 import { cn } from "@/lib/utils/cn";
 import { useMedia } from "use-media";
 import Brand from "@/components/ui/brand";

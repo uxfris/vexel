@@ -113,7 +113,7 @@
     --secondary: oklch(0.22 0 0);
     --secondary-foreground: oklch(0.89 0 0);
 
-    --muted: oklch(0.24 0 0);
+    --muted: oklch(0.9521 0 0);
     --muted-foreground: oklch(0.75 0 0);
     --muted-foreground-secondary: oklch(0.89 0 0);
 
@@ -124,7 +124,7 @@
     --destructive: oklch(0.55 0.23 35.55);
 
     --border: oklch(0.25 0 0);
-    --input: oklch(0.22 0 0);
+    --input: oklch(0.9851 0 0);
     --ring: oklch(0.78 0 0);
 
     /* ---- Charts tuned for dark mode ---- */

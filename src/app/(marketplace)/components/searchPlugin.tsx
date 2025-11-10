@@ -5,7 +5,7 @@ import { ArrowRight, Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { PLUGINS, PLUGIN_CATEGORIES } from "@/lib/utils/constants";
 import Link from "next/link";
-import { useSearch } from "../context/search-context";
+import { useSearch } from "../hooks/useSearch";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 import Image from "next/image";

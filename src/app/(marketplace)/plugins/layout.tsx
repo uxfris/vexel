@@ -1,7 +1,7 @@
 import Navbar from "../components/navbar";
-import { SidebarProvider } from "../context/sidebar-context";
-import { SearchProvider } from "../context/search-context";
-import SearchPlugin from "../components/search-plugin";
+import { SidebarProvider } from "../hooks/useSidebar";
+import { SearchProvider } from "../hooks/useSearch";
+import SearchPlugin from "../components/searchPlugin";
 
 const Plugin = ({ children }: { children: React.ReactNode }) => {
   return (

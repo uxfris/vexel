@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils/cn";
-import { useSidebar } from "../context/sidebar-context";
+import { useSidebar } from "../hooks/useSidebar";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { PLUGIN_CATEGORIES } from "@/lib/utils/constants";

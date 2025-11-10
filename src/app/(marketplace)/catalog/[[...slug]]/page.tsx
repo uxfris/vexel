@@ -1,6 +1,6 @@
 import Header from "../../components/header";
-import PluginCard from "../../components/plugin-card";
-import { PLUGINS, PLUGIN_CATEGORIES } from "@/lib/utils/constants";
+import PluginCard from "../../components/pluginCard";
+import { PLUGINS } from "@/lib/utils/constants";
 
 const mock = {
   featured: [

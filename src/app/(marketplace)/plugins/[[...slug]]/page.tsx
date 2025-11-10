@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Breadcrumb from "../../components/breadcrumb";
 import { PluginDetail } from "../components/plugin-detail";
 import { notFound } from "next/navigation";
-import PluginCard from "../../components/plugin-card";
+import PluginCard from "../../components/pluginCard";
 import { PLUGINS } from "@/lib/utils/constants";
 import Divider from "@/components/ui/divider";
 import Footer from "../../../../components/ui/footer";
