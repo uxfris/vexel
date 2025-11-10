@@ -1,3 +1,4 @@
+import LoginModal from "@/components/shared/login";
 import Header from "../../components/header";
 import PluginCard from "../../components/pluginCard";
 import { PLUGINS } from "@/lib/utils/constants";

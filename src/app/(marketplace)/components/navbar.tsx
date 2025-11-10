@@ -1,28 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   MenuIcon,
   SearchIcon,
   ShoppingCartIcon,
   Store,
-  UserIcon,
   XIcon,
 } from "lucide-react";
 import { useSidebar } from "../hooks/useSidebar";
-import { useSearch } from "../hooks/useSearch";
 import { useEffect, useState } from "react";
-import SearchPlugin from "./searchPlugin";
 import { cn } from "@/lib/utils/cn";
 import { useMedia } from "use-media";
 import Brand from "@/components/ui/brand";
+import { useModal } from "@/lib/hooks/useModal";
+import SearchPluginModal from "./searchPluginModal";
+import LoginModal from "@/components/shared/login";
 
 const Navbar = () => {
   const isMobile = useMedia({ maxWidth: 767 });
   const { open, toggle } = useSidebar();
-  const { searchToggle } = useSearch();
+  const { openModal } = useModal();
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -30,7 +29,7 @@ const Navbar = () => {
     const handleKeydown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        searchToggle();
+        openSearchModal();
       }
     };
     window.addEventListener("keydown", handleKeydown);
@@ -63,6 +62,11 @@ const Navbar = () => {
     // }
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMobile, lastScrollY]);
+
+  function openSearchModal() {
+    openModal(<SearchPluginModal />, { className: "rounded-none" });
+  }
+
   return (
     <header
       className={cn(
@@ -100,7 +104,7 @@ const Navbar = () => {
               Creators
             </Link>
             <button
-              onClick={searchToggle}
+              onClick={openSearchModal}
               className="hidden md:flex items-center gap-2 cursor-pointer"
             >
               <SearchIcon className="w-4 h-4 text-muted-foreground" />
@@ -112,7 +116,7 @@ const Navbar = () => {
           </nav>
         </div>
         <button
-          onClick={searchToggle}
+          onClick={openSearchModal}
           className="w-full md:hidden cursor-pointer flex items-center bg-input rounded-full border border-border mx-4 px-4 py-2 text-muted-foreground"
         >
           <span className="text-sm font-medium text-muted-foreground">
@@ -137,19 +141,19 @@ const Navbar = () => {
           <Link href="/cart">
             <ShoppingCartIcon className="w-5 h-5 text-muted-foreground hover:text-foreground cursor-pointer" />
           </Link>
-          <Link href="/login">
-            {false ? (
-              <UserIcon className="w-5 h-5 text-muted-foreground hover:text-foreground cursor-pointer" />
-            ) : (
-              <p className="text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer">
-                Login
-              </p>
-            )}
-          </Link>
+          <Button
+            variant="ghost"
+            onClick={() =>
+              openModal(<LoginModal />, {
+                className: "max-w-96",
+              })
+            }
+          >
+            Login
+          </Button>
         </div>
       </div>
     </header>
   );
 };
-
 export default Navbar;
