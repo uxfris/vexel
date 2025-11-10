@@ -155,7 +155,6 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-      <SearchPlugin />
     </header>
   );
 };

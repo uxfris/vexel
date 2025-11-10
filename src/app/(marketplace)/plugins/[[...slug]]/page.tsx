@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Breadcrumb from "../../components/breadrumb";
+import Breadcrumb from "../../components/breadcrumb";
 import { PluginDetail } from "../components/plugin-detail";
 import { notFound } from "next/navigation";
 import PluginCard from "../../components/plugin-card";
