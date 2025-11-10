@@ -12,7 +12,7 @@ const CatalogLayout = ({ children }: { children: React.ReactNode }) => {
         <SearchPlugin />
         <div className="flex flex-1">
           <Sidebar />
-          <main className="flex-1 max-w-[1440px] overflow-auto p-4 py-16 md:p-12">
+          <main className="flex-1 max-w-[1440px] overflow-auto p-4 pt-6 md:py-16 md:p-12">
             {children}
           </main>
         </div>
