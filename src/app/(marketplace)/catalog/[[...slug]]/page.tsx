@@ -109,7 +109,7 @@ export default async function CatalogPage({
   return (
     <>
       <Header
-        category={slug ? data[0]?.category : ""}
+        category={slug ? data[0]?.category : "Explore Catalog"}
         activeSubCategories={subCategories}
       />
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-8 gap-y-10 md:gap-y-15 mb-15">

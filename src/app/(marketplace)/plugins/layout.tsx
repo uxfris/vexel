@@ -9,7 +9,7 @@ const Plugin = ({ children }: { children: React.ReactNode }) => {
       <SearchProvider>
         <Navbar />
         <SearchPlugin />
-        <main className="w-full max-w-[1440px] relative mx-auto p-4 md:p-12">
+        <main className="w-full max-w-[1440px] relative mx-auto p-4 py-16 md:p-12">
           {children}
         </main>
       </SearchProvider>
