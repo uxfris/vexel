@@ -11,57 +11,79 @@ import FilterDropdown from "@/components/ui/filter-dropdown";
 import { pricingOptions, sortOptions } from "@/lib/utils/constants";
 import { updateQueryParam } from "@/lib/utils/queryparams";
 
-const tags = [
-  {
-    id: "1",
-    name: "Animation",
-    slug: "animation",
-  },
-  {
-    id: "2",
-    name: "Text",
-    slug: "text",
-  },
-];
+type SubCategory = {
+  id: string;
+  name: string;
+};
 
 interface HeaderProps {
   category: string;
-  activeSubCategories: string[];
+  subcategories: SubCategory[];
+  activeSubcategories: string[];
 }
 
-const Header = ({ category, activeSubCategories }: HeaderProps) => {
+const Header = ({
+  category,
+  subcategories,
+  activeSubcategories,
+}: HeaderProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [activeTags, setActiveTags] = useState<string[]>(activeSubCategories);
+  const [activeSubcat, setActiveSubcat] =
+    useState<string[]>(activeSubcategories);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    let shouldUpdate = false;
+
+    // default filters if not present
+    if (!params.has("sort")) {
+      params.set("sort", "recent");
+      shouldUpdate = true;
+    }
+
+    if (!params.has("pricing")) {
+      params.set("pricing", "paid_free");
+      shouldUpdate = true;
+    }
+
+    if (shouldUpdate) {
+      router.replace(`?${params.toString()}`);
+    }
+
+    // sync active tags
+    const current = searchParams.get("subcategories");
+    setActiveSubcat(current ? current.split(",") : []);
+  }, [searchParams, router]);
 
   useEffect(() => {
     const current = searchParams.get("subcategories");
 
-    setActiveTags(current ? current.split(",") : []);
+    setActiveSubcat(current ? current.split(",") : []);
   }, [searchParams]);
 
   const handleClick = (tagId: string) => {
     const current = searchParams.get("subcategories");
     const selected = current ? current.split(",") : [];
 
-    let newTags = selected.includes(tagId)
+    let newSubcat = selected.includes(tagId)
       ? selected.filter((id) => id != tagId)
       : [...selected, tagId];
 
     const params = new URLSearchParams(searchParams.toString());
-    if (newTags.length > 0) params.set("subcategories", newTags.join(","));
+    if (newSubcat.length > 0) params.set("subcategories", newSubcat.join(","));
     else params.delete("subcategories");
     router.push(`?${params.toString()}`);
 
-    setActiveTags(newTags);
+    setActiveSubcat(newSubcat);
   };
 
   const clearAll = () => {
     const params = new URLSearchParams(searchParams.toString());
     params.delete("subcategories");
     router.push(`?${params.toString()}`);
-    setActiveTags([]);
+    setActiveSubcat([]);
   };
 
   return (
@@ -73,22 +95,22 @@ const Header = ({ category, activeSubCategories }: HeaderProps) => {
         Discover the best animation plugins for your projects.
       </p>
       <div className="wrap space-x-2">
-        {tags.map((tag) => (
+        {subcategories.map((category) => (
           <Button
-            key={tag.id}
-            onClick={() => handleClick(tag.id)}
+            key={category.id}
+            onClick={() => handleClick(category.id)}
             variant={"outline"}
             className={cn(
               "shadow-xs py-2 px-4 text-sm rounded-full",
-              activeTags.includes(tag.id)
+              activeSubcat.includes(category.id)
                 ? "border-blue-600 text-blue-600 hover:text-blue-600"
                 : ""
             )}
           >
-            <p> {tag.name} </p>
+            <p> {category.name} </p>
           </Button>
         ))}
-        {activeTags.length > 0 && (
+        {activeSubcat.length > 0 && (
           <Button
             onClick={clearAll}
             variant="outline"
@@ -102,14 +124,14 @@ const Header = ({ category, activeSubCategories }: HeaderProps) => {
         <div className="flex gap-4 items-center justify-between">
           <FilterDropdown
             options={sortOptions}
-            defaultValue="Recent"
+            defaultValue={searchParams.get("sort") || "recent"}
             onChange={(value) =>
               updateQueryParam(router, searchParams, "sort", value)
             }
           />
           <FilterDropdown
             options={pricingOptions}
-            defaultValue="Paid + Free"
+            defaultValue={searchParams.get("pricing") || "paid_free"}
             buttonClassName="text-sm"
             onChange={(value) =>
               updateQueryParam(router, searchParams, "pricing", value)

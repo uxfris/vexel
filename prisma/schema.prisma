@@ -194,6 +194,9 @@ model Plugin {
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])
 
+  subcategoryId String?
+  subcategory   Subcategory? @relation(fields: [subcategoryId], references: [id])
+
   tags       PluginTag[]
   orderItems OrderItem[]
   reviews    Review[]
@@ -227,11 +230,32 @@ model Category {
 
   plugins Plugin[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  subcategories Subcategory[]
 
   @@index([slug])
   @@map("categories")
+}
+
+model Subcategory {
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  description String?
+  order       Int     @default(0)
+
+  // Relations
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  plugins    Plugin[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([slug])
+  @@map("subcategories")
 }
 
 model Tag {

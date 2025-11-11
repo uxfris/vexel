@@ -57,6 +57,7 @@ export const ModelName = {
   Otp: 'Otp',
   Plugin: 'Plugin',
   Category: 'Category',
+  Subcategory: 'Subcategory',
   Tag: 'Tag',
   PluginTag: 'PluginTag',
   Order: 'Order',
@@ -195,6 +196,7 @@ export const PluginScalarFieldEnum = {
   featured: 'featured',
   sellerId: 'sellerId',
   categoryId: 'categoryId',
+  subcategoryId: 'subcategoryId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   publishedAt: 'publishedAt',
@@ -216,6 +218,20 @@ export const CategoryScalarFieldEnum = {
 } as const
 
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const SubcategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  order: 'order',
+  categoryId: 'categoryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubcategoryScalarFieldEnum = (typeof SubcategoryScalarFieldEnum)[keyof typeof SubcategoryScalarFieldEnum]
 
 
 export const TagScalarFieldEnum = {

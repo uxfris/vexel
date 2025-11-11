@@ -52,8 +52,8 @@ export default function SidebarContent({
                 : ""
             )}
           >
-            <div className="border border-border rounded-sm p-1 w-9 h-9 flex items-center justify-center">
-              {category.icon}
+            <div className="border border-border rounded-sm p-1 w-9 h-9 flex items-center justify-center uppercase">
+              {category.icon?.charAt(0)}
             </div>
             <p className="text-sm font-medium">{category.name}</p>
           </Link>

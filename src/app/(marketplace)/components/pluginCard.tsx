@@ -79,7 +79,7 @@ const PluginCard = ({
         </Link>
         <Link href={`/plugins/${plugin.slug}`}>
           <p className="text-muted-foreground-secondary font-medium mt-2">
-            {plugin.description}
+            {plugin.shortDescription}
           </p>
         </Link>
       </div>

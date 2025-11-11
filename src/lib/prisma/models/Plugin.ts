@@ -64,6 +64,7 @@ export type PluginMinAggregateOutputType = {
   featured: boolean | null
   sellerId: string | null
   categoryId: string | null
+  subcategoryId: string | null
   createdAt: Date | null
   updatedAt: Date | null
   publishedAt: Date | null
@@ -92,6 +93,7 @@ export type PluginMaxAggregateOutputType = {
   featured: boolean | null
   sellerId: string | null
   categoryId: string | null
+  subcategoryId: string | null
   createdAt: Date | null
   updatedAt: Date | null
   publishedAt: Date | null
@@ -123,6 +125,7 @@ export type PluginCountAggregateOutputType = {
   featured: number
   sellerId: number
   categoryId: number
+  subcategoryId: number
   createdAt: number
   updatedAt: number
   publishedAt: number
@@ -169,6 +172,7 @@ export type PluginMinAggregateInputType = {
   featured?: true
   sellerId?: true
   categoryId?: true
+  subcategoryId?: true
   createdAt?: true
   updatedAt?: true
   publishedAt?: true
@@ -197,6 +201,7 @@ export type PluginMaxAggregateInputType = {
   featured?: true
   sellerId?: true
   categoryId?: true
+  subcategoryId?: true
   createdAt?: true
   updatedAt?: true
   publishedAt?: true
@@ -228,6 +233,7 @@ export type PluginCountAggregateInputType = {
   featured?: true
   sellerId?: true
   categoryId?: true
+  subcategoryId?: true
   createdAt?: true
   updatedAt?: true
   publishedAt?: true
@@ -346,6 +352,7 @@ export type PluginGroupByOutputType = {
   featured: boolean
   sellerId: string
   categoryId: string
+  subcategoryId: string | null
   createdAt: Date
   updatedAt: Date
   publishedAt: Date | null
@@ -400,12 +407,14 @@ export type PluginWhereInput = {
   featured?: Prisma.BoolFilter<"Plugin"> | boolean
   sellerId?: Prisma.StringFilter<"Plugin"> | string
   categoryId?: Prisma.StringFilter<"Plugin"> | string
+  subcategoryId?: Prisma.StringNullableFilter<"Plugin"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Plugin"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Plugin"> | Date | string
   publishedAt?: Prisma.DateTimeNullableFilter<"Plugin"> | Date | string | null
   userId?: Prisma.StringNullableFilter<"Plugin"> | string | null
   seller?: Prisma.XOR<Prisma.SellerScalarRelationFilter, Prisma.SellerWhereInput>
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
+  subcategory?: Prisma.XOR<Prisma.SubcategoryNullableScalarRelationFilter, Prisma.SubcategoryWhereInput> | null
   tags?: Prisma.PluginTagListRelationFilter
   orderItems?: Prisma.OrderItemListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
@@ -437,12 +446,14 @@ export type PluginOrderByWithRelationInput = {
   featured?: Prisma.SortOrder
   sellerId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  subcategoryId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
   seller?: Prisma.SellerOrderByWithRelationInput
   category?: Prisma.CategoryOrderByWithRelationInput
+  subcategory?: Prisma.SubcategoryOrderByWithRelationInput
   tags?: Prisma.PluginTagOrderByRelationAggregateInput
   orderItems?: Prisma.OrderItemOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
@@ -477,12 +488,14 @@ export type PluginWhereUniqueInput = Prisma.AtLeast<{
   featured?: Prisma.BoolFilter<"Plugin"> | boolean
   sellerId?: Prisma.StringFilter<"Plugin"> | string
   categoryId?: Prisma.StringFilter<"Plugin"> | string
+  subcategoryId?: Prisma.StringNullableFilter<"Plugin"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Plugin"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Plugin"> | Date | string
   publishedAt?: Prisma.DateTimeNullableFilter<"Plugin"> | Date | string | null
   userId?: Prisma.StringNullableFilter<"Plugin"> | string | null
   seller?: Prisma.XOR<Prisma.SellerScalarRelationFilter, Prisma.SellerWhereInput>
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
+  subcategory?: Prisma.XOR<Prisma.SubcategoryNullableScalarRelationFilter, Prisma.SubcategoryWhereInput> | null
   tags?: Prisma.PluginTagListRelationFilter
   orderItems?: Prisma.OrderItemListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
@@ -514,6 +527,7 @@ export type PluginOrderByWithAggregationInput = {
   featured?: Prisma.SortOrder
   sellerId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  subcategoryId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -553,6 +567,7 @@ export type PluginScalarWhereWithAggregatesInput = {
   featured?: Prisma.BoolWithAggregatesFilter<"Plugin"> | boolean
   sellerId?: Prisma.StringWithAggregatesFilter<"Plugin"> | string
   categoryId?: Prisma.StringWithAggregatesFilter<"Plugin"> | string
+  subcategoryId?: Prisma.StringNullableWithAggregatesFilter<"Plugin"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Plugin"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Plugin"> | Date | string
   publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Plugin"> | Date | string | null
@@ -587,6 +602,7 @@ export type PluginCreateInput = {
   publishedAt?: Date | string | null
   seller: Prisma.SellerCreateNestedOneWithoutPluginsInput
   category: Prisma.CategoryCreateNestedOneWithoutPluginsInput
+  subcategory?: Prisma.SubcategoryCreateNestedOneWithoutPluginsInput
   tags?: Prisma.PluginTagCreateNestedManyWithoutPluginInput
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutPluginInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutPluginInput
@@ -618,6 +634,7 @@ export type PluginUncheckedCreateInput = {
   featured?: boolean
   sellerId: string
   categoryId: string
+  subcategoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
@@ -655,6 +672,7 @@ export type PluginUpdateInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   seller?: Prisma.SellerUpdateOneRequiredWithoutPluginsNestedInput
   category?: Prisma.CategoryUpdateOneRequiredWithoutPluginsNestedInput
+  subcategory?: Prisma.SubcategoryUpdateOneWithoutPluginsNestedInput
   tags?: Prisma.PluginTagUpdateManyWithoutPluginNestedInput
   orderItems?: Prisma.OrderItemUpdateManyWithoutPluginNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutPluginNestedInput
@@ -686,6 +704,7 @@ export type PluginUncheckedUpdateInput = {
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sellerId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  subcategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -720,6 +739,7 @@ export type PluginCreateManyInput = {
   featured?: boolean
   sellerId: string
   categoryId: string
+  subcategoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
@@ -779,6 +799,7 @@ export type PluginUncheckedUpdateManyInput = {
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sellerId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  subcategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -828,6 +849,7 @@ export type PluginCountOrderByAggregateInput = {
   featured?: Prisma.SortOrder
   sellerId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  subcategoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
@@ -864,6 +886,7 @@ export type PluginMaxOrderByAggregateInput = {
   featured?: Prisma.SortOrder
   sellerId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  subcategoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
@@ -892,6 +915,7 @@ export type PluginMinOrderByAggregateInput = {
   featured?: Prisma.SortOrder
   sellerId?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
+  subcategoryId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
@@ -1084,6 +1108,48 @@ export type PluginUncheckedUpdateManyWithoutCategoryNestedInput = {
   deleteMany?: Prisma.PluginScalarWhereInput | Prisma.PluginScalarWhereInput[]
 }
 
+export type PluginCreateNestedManyWithoutSubcategoryInput = {
+  create?: Prisma.XOR<Prisma.PluginCreateWithoutSubcategoryInput, Prisma.PluginUncheckedCreateWithoutSubcategoryInput> | Prisma.PluginCreateWithoutSubcategoryInput[] | Prisma.PluginUncheckedCreateWithoutSubcategoryInput[]
+  connectOrCreate?: Prisma.PluginCreateOrConnectWithoutSubcategoryInput | Prisma.PluginCreateOrConnectWithoutSubcategoryInput[]
+  createMany?: Prisma.PluginCreateManySubcategoryInputEnvelope
+  connect?: Prisma.PluginWhereUniqueInput | Prisma.PluginWhereUniqueInput[]
+}
+
+export type PluginUncheckedCreateNestedManyWithoutSubcategoryInput = {
+  create?: Prisma.XOR<Prisma.PluginCreateWithoutSubcategoryInput, Prisma.PluginUncheckedCreateWithoutSubcategoryInput> | Prisma.PluginCreateWithoutSubcategoryInput[] | Prisma.PluginUncheckedCreateWithoutSubcategoryInput[]
+  connectOrCreate?: Prisma.PluginCreateOrConnectWithoutSubcategoryInput | Prisma.PluginCreateOrConnectWithoutSubcategoryInput[]
+  createMany?: Prisma.PluginCreateManySubcategoryInputEnvelope
+  connect?: Prisma.PluginWhereUniqueInput | Prisma.PluginWhereUniqueInput[]
+}
+
+export type PluginUpdateManyWithoutSubcategoryNestedInput = {
+  create?: Prisma.XOR<Prisma.PluginCreateWithoutSubcategoryInput, Prisma.PluginUncheckedCreateWithoutSubcategoryInput> | Prisma.PluginCreateWithoutSubcategoryInput[] | Prisma.PluginUncheckedCreateWithoutSubcategoryInput[]
+  connectOrCreate?: Prisma.PluginCreateOrConnectWithoutSubcategoryInput | Prisma.PluginCreateOrConnectWithoutSubcategoryInput[]
+  upsert?: Prisma.PluginUpsertWithWhereUniqueWithoutSubcategoryInput | Prisma.PluginUpsertWithWhereUniqueWithoutSubcategoryInput[]
+  createMany?: Prisma.PluginCreateManySubcategoryInputEnvelope
+  set?: Prisma.PluginWhereUniqueInput | Prisma.PluginWhereUniqueInput[]
+  disconnect?: Prisma.PluginWhereUniqueInput | Prisma.PluginWhereUniqueInput[]
+  delete?: Prisma.PluginWhereUniqueInput | Prisma.PluginWhereUniqueInput[]
+  connect?: Prisma.PluginWhereUniqueInput | Prisma.PluginWhereUniqueInput[]
+  update?: Prisma.PluginUpdateWithWhereUniqueWithoutSubcategoryInput | Prisma.PluginUpdateWithWhereUniqueWithoutSubcategoryInput[]
+  updateMany?: Prisma.PluginUpdateManyWithWhereWithoutSubcategoryInput | Prisma.PluginUpdateManyWithWhereWithoutSubcategoryInput[]
+  deleteMany?: Prisma.PluginScalarWhereInput | Prisma.PluginScalarWhereInput[]
+}
+
+export type PluginUncheckedUpdateManyWithoutSubcategoryNestedInput = {
+  create?: Prisma.XOR<Prisma.PluginCreateWithoutSubcategoryInput, Prisma.PluginUncheckedCreateWithoutSubcategoryInput> | Prisma.PluginCreateWithoutSubcategoryInput[] | Prisma.PluginUncheckedCreateWithoutSubcategoryInput[]
+  connectOrCreate?: Prisma.PluginCreateOrConnectWithoutSubcategoryInput | Prisma.PluginCreateOrConnectWithoutSubcategoryInput[]
+  upsert?: Prisma.PluginUpsertWithWhereUniqueWithoutSubcategoryInput | Prisma.PluginUpsertWithWhereUniqueWithoutSubcategoryInput[]
+  createMany?: Prisma.PluginCreateManySubcategoryInputEnvelope
+  set?: Prisma.PluginWhereUniqueInput | Prisma.PluginWhereUniqueInput[]
+  disconnect?: Prisma.PluginWhereUniqueInput | Prisma.PluginWhereUniqueInput[]
+  delete?: Prisma.PluginWhereUniqueInput | Prisma.PluginWhereUniqueInput[]
+  connect?: Prisma.PluginWhereUniqueInput | Prisma.PluginWhereUniqueInput[]
+  update?: Prisma.PluginUpdateWithWhereUniqueWithoutSubcategoryInput | Prisma.PluginUpdateWithWhereUniqueWithoutSubcategoryInput[]
+  updateMany?: Prisma.PluginUpdateManyWithWhereWithoutSubcategoryInput | Prisma.PluginUpdateManyWithWhereWithoutSubcategoryInput[]
+  deleteMany?: Prisma.PluginScalarWhereInput | Prisma.PluginScalarWhereInput[]
+}
+
 export type PluginCreateNestedOneWithoutTagsInput = {
   create?: Prisma.XOR<Prisma.PluginCreateWithoutTagsInput, Prisma.PluginUncheckedCreateWithoutTagsInput>
   connectOrCreate?: Prisma.PluginCreateOrConnectWithoutTagsInput
@@ -1154,6 +1220,7 @@ export type PluginCreateWithoutUserInput = {
   publishedAt?: Date | string | null
   seller: Prisma.SellerCreateNestedOneWithoutPluginsInput
   category: Prisma.CategoryCreateNestedOneWithoutPluginsInput
+  subcategory?: Prisma.SubcategoryCreateNestedOneWithoutPluginsInput
   tags?: Prisma.PluginTagCreateNestedManyWithoutPluginInput
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutPluginInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutPluginInput
@@ -1184,6 +1251,7 @@ export type PluginUncheckedCreateWithoutUserInput = {
   featured?: boolean
   sellerId: string
   categoryId: string
+  subcategoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
@@ -1246,6 +1314,7 @@ export type PluginScalarWhereInput = {
   featured?: Prisma.BoolFilter<"Plugin"> | boolean
   sellerId?: Prisma.StringFilter<"Plugin"> | string
   categoryId?: Prisma.StringFilter<"Plugin"> | string
+  subcategoryId?: Prisma.StringNullableFilter<"Plugin"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Plugin"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Plugin"> | Date | string
   publishedAt?: Prisma.DateTimeNullableFilter<"Plugin"> | Date | string | null
@@ -1279,6 +1348,7 @@ export type PluginCreateWithoutSellerInput = {
   updatedAt?: Date | string
   publishedAt?: Date | string | null
   category: Prisma.CategoryCreateNestedOneWithoutPluginsInput
+  subcategory?: Prisma.SubcategoryCreateNestedOneWithoutPluginsInput
   tags?: Prisma.PluginTagCreateNestedManyWithoutPluginInput
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutPluginInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutPluginInput
@@ -1309,6 +1379,7 @@ export type PluginUncheckedCreateWithoutSellerInput = {
   status?: $Enums.PluginStatus
   featured?: boolean
   categoryId: string
+  subcategoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
@@ -1371,6 +1442,7 @@ export type PluginCreateWithoutCategoryInput = {
   updatedAt?: Date | string
   publishedAt?: Date | string | null
   seller: Prisma.SellerCreateNestedOneWithoutPluginsInput
+  subcategory?: Prisma.SubcategoryCreateNestedOneWithoutPluginsInput
   tags?: Prisma.PluginTagCreateNestedManyWithoutPluginInput
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutPluginInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutPluginInput
@@ -1401,6 +1473,7 @@ export type PluginUncheckedCreateWithoutCategoryInput = {
   status?: $Enums.PluginStatus
   featured?: boolean
   sellerId: string
+  subcategoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
@@ -1436,6 +1509,100 @@ export type PluginUpdateManyWithWhereWithoutCategoryInput = {
   data: Prisma.XOR<Prisma.PluginUpdateManyMutationInput, Prisma.PluginUncheckedUpdateManyWithoutCategoryInput>
 }
 
+export type PluginCreateWithoutSubcategoryInput = {
+  id?: string
+  title: string
+  slug: string
+  description: string
+  shortDescription?: string | null
+  thumbnailUrl: string
+  videoUrl?: string | null
+  demoGifUrl: string
+  images?: Prisma.PluginCreateimagesInput | string[]
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: string
+  fileUrl: string
+  fileName: string
+  fileSize: number
+  version?: string
+  aeVersions?: Prisma.PluginCreateaeVersionsInput | string[]
+  operatingSystems?: Prisma.PluginCreateoperatingSystemsInput | string[]
+  downloadCount?: number
+  viewCount?: number
+  status?: $Enums.PluginStatus
+  featured?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  publishedAt?: Date | string | null
+  seller: Prisma.SellerCreateNestedOneWithoutPluginsInput
+  category: Prisma.CategoryCreateNestedOneWithoutPluginsInput
+  tags?: Prisma.PluginTagCreateNestedManyWithoutPluginInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutPluginInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutPluginInput
+  user?: Prisma.UserCreateNestedOneWithoutPluginsInput
+}
+
+export type PluginUncheckedCreateWithoutSubcategoryInput = {
+  id?: string
+  title: string
+  slug: string
+  description: string
+  shortDescription?: string | null
+  thumbnailUrl: string
+  videoUrl?: string | null
+  demoGifUrl: string
+  images?: Prisma.PluginCreateimagesInput | string[]
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: string
+  fileUrl: string
+  fileName: string
+  fileSize: number
+  version?: string
+  aeVersions?: Prisma.PluginCreateaeVersionsInput | string[]
+  operatingSystems?: Prisma.PluginCreateoperatingSystemsInput | string[]
+  downloadCount?: number
+  viewCount?: number
+  status?: $Enums.PluginStatus
+  featured?: boolean
+  sellerId: string
+  categoryId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  publishedAt?: Date | string | null
+  userId?: string | null
+  tags?: Prisma.PluginTagUncheckedCreateNestedManyWithoutPluginInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutPluginInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutPluginInput
+}
+
+export type PluginCreateOrConnectWithoutSubcategoryInput = {
+  where: Prisma.PluginWhereUniqueInput
+  create: Prisma.XOR<Prisma.PluginCreateWithoutSubcategoryInput, Prisma.PluginUncheckedCreateWithoutSubcategoryInput>
+}
+
+export type PluginCreateManySubcategoryInputEnvelope = {
+  data: Prisma.PluginCreateManySubcategoryInput | Prisma.PluginCreateManySubcategoryInput[]
+  skipDuplicates?: boolean
+}
+
+export type PluginUpsertWithWhereUniqueWithoutSubcategoryInput = {
+  where: Prisma.PluginWhereUniqueInput
+  update: Prisma.XOR<Prisma.PluginUpdateWithoutSubcategoryInput, Prisma.PluginUncheckedUpdateWithoutSubcategoryInput>
+  create: Prisma.XOR<Prisma.PluginCreateWithoutSubcategoryInput, Prisma.PluginUncheckedCreateWithoutSubcategoryInput>
+}
+
+export type PluginUpdateWithWhereUniqueWithoutSubcategoryInput = {
+  where: Prisma.PluginWhereUniqueInput
+  data: Prisma.XOR<Prisma.PluginUpdateWithoutSubcategoryInput, Prisma.PluginUncheckedUpdateWithoutSubcategoryInput>
+}
+
+export type PluginUpdateManyWithWhereWithoutSubcategoryInput = {
+  where: Prisma.PluginScalarWhereInput
+  data: Prisma.XOR<Prisma.PluginUpdateManyMutationInput, Prisma.PluginUncheckedUpdateManyWithoutSubcategoryInput>
+}
+
 export type PluginCreateWithoutTagsInput = {
   id?: string
   title: string
@@ -1464,6 +1631,7 @@ export type PluginCreateWithoutTagsInput = {
   publishedAt?: Date | string | null
   seller: Prisma.SellerCreateNestedOneWithoutPluginsInput
   category: Prisma.CategoryCreateNestedOneWithoutPluginsInput
+  subcategory?: Prisma.SubcategoryCreateNestedOneWithoutPluginsInput
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutPluginInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutPluginInput
   user?: Prisma.UserCreateNestedOneWithoutPluginsInput
@@ -1494,6 +1662,7 @@ export type PluginUncheckedCreateWithoutTagsInput = {
   featured?: boolean
   sellerId: string
   categoryId: string
+  subcategoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
@@ -1546,6 +1715,7 @@ export type PluginUpdateWithoutTagsInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   seller?: Prisma.SellerUpdateOneRequiredWithoutPluginsNestedInput
   category?: Prisma.CategoryUpdateOneRequiredWithoutPluginsNestedInput
+  subcategory?: Prisma.SubcategoryUpdateOneWithoutPluginsNestedInput
   orderItems?: Prisma.OrderItemUpdateManyWithoutPluginNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutPluginNestedInput
   user?: Prisma.UserUpdateOneWithoutPluginsNestedInput
@@ -1576,6 +1746,7 @@ export type PluginUncheckedUpdateWithoutTagsInput = {
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sellerId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  subcategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1612,6 +1783,7 @@ export type PluginCreateWithoutOrderItemsInput = {
   publishedAt?: Date | string | null
   seller: Prisma.SellerCreateNestedOneWithoutPluginsInput
   category: Prisma.CategoryCreateNestedOneWithoutPluginsInput
+  subcategory?: Prisma.SubcategoryCreateNestedOneWithoutPluginsInput
   tags?: Prisma.PluginTagCreateNestedManyWithoutPluginInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutPluginInput
   user?: Prisma.UserCreateNestedOneWithoutPluginsInput
@@ -1642,6 +1814,7 @@ export type PluginUncheckedCreateWithoutOrderItemsInput = {
   featured?: boolean
   sellerId: string
   categoryId: string
+  subcategoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
@@ -1694,6 +1867,7 @@ export type PluginUpdateWithoutOrderItemsInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   seller?: Prisma.SellerUpdateOneRequiredWithoutPluginsNestedInput
   category?: Prisma.CategoryUpdateOneRequiredWithoutPluginsNestedInput
+  subcategory?: Prisma.SubcategoryUpdateOneWithoutPluginsNestedInput
   tags?: Prisma.PluginTagUpdateManyWithoutPluginNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutPluginNestedInput
   user?: Prisma.UserUpdateOneWithoutPluginsNestedInput
@@ -1724,6 +1898,7 @@ export type PluginUncheckedUpdateWithoutOrderItemsInput = {
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sellerId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  subcategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1760,6 +1935,7 @@ export type PluginCreateWithoutReviewsInput = {
   publishedAt?: Date | string | null
   seller: Prisma.SellerCreateNestedOneWithoutPluginsInput
   category: Prisma.CategoryCreateNestedOneWithoutPluginsInput
+  subcategory?: Prisma.SubcategoryCreateNestedOneWithoutPluginsInput
   tags?: Prisma.PluginTagCreateNestedManyWithoutPluginInput
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutPluginInput
   user?: Prisma.UserCreateNestedOneWithoutPluginsInput
@@ -1790,6 +1966,7 @@ export type PluginUncheckedCreateWithoutReviewsInput = {
   featured?: boolean
   sellerId: string
   categoryId: string
+  subcategoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
@@ -1842,6 +2019,7 @@ export type PluginUpdateWithoutReviewsInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   seller?: Prisma.SellerUpdateOneRequiredWithoutPluginsNestedInput
   category?: Prisma.CategoryUpdateOneRequiredWithoutPluginsNestedInput
+  subcategory?: Prisma.SubcategoryUpdateOneWithoutPluginsNestedInput
   tags?: Prisma.PluginTagUpdateManyWithoutPluginNestedInput
   orderItems?: Prisma.OrderItemUpdateManyWithoutPluginNestedInput
   user?: Prisma.UserUpdateOneWithoutPluginsNestedInput
@@ -1872,6 +2050,7 @@ export type PluginUncheckedUpdateWithoutReviewsInput = {
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sellerId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  subcategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1905,6 +2084,7 @@ export type PluginCreateManyUserInput = {
   featured?: boolean
   sellerId: string
   categoryId: string
+  subcategoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
@@ -1938,6 +2118,7 @@ export type PluginUpdateWithoutUserInput = {
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   seller?: Prisma.SellerUpdateOneRequiredWithoutPluginsNestedInput
   category?: Prisma.CategoryUpdateOneRequiredWithoutPluginsNestedInput
+  subcategory?: Prisma.SubcategoryUpdateOneWithoutPluginsNestedInput
   tags?: Prisma.PluginTagUpdateManyWithoutPluginNestedInput
   orderItems?: Prisma.OrderItemUpdateManyWithoutPluginNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutPluginNestedInput
@@ -1968,6 +2149,7 @@ export type PluginUncheckedUpdateWithoutUserInput = {
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sellerId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  subcategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2001,6 +2183,7 @@ export type PluginUncheckedUpdateManyWithoutUserInput = {
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sellerId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  subcategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2030,6 +2213,7 @@ export type PluginCreateManySellerInput = {
   status?: $Enums.PluginStatus
   featured?: boolean
   categoryId: string
+  subcategoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
@@ -2063,6 +2247,7 @@ export type PluginUpdateWithoutSellerInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   category?: Prisma.CategoryUpdateOneRequiredWithoutPluginsNestedInput
+  subcategory?: Prisma.SubcategoryUpdateOneWithoutPluginsNestedInput
   tags?: Prisma.PluginTagUpdateManyWithoutPluginNestedInput
   orderItems?: Prisma.OrderItemUpdateManyWithoutPluginNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutPluginNestedInput
@@ -2093,6 +2278,7 @@ export type PluginUncheckedUpdateWithoutSellerInput = {
   status?: Prisma.EnumPluginStatusFieldUpdateOperationsInput | $Enums.PluginStatus
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  subcategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2126,6 +2312,7 @@ export type PluginUncheckedUpdateManyWithoutSellerInput = {
   status?: Prisma.EnumPluginStatusFieldUpdateOperationsInput | $Enums.PluginStatus
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  subcategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2156,6 +2343,7 @@ export type PluginCreateManyCategoryInput = {
   status?: $Enums.PluginStatus
   featured?: boolean
   sellerId: string
+  subcategoryId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   publishedAt?: Date | string | null
@@ -2189,6 +2377,7 @@ export type PluginUpdateWithoutCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   seller?: Prisma.SellerUpdateOneRequiredWithoutPluginsNestedInput
+  subcategory?: Prisma.SubcategoryUpdateOneWithoutPluginsNestedInput
   tags?: Prisma.PluginTagUpdateManyWithoutPluginNestedInput
   orderItems?: Prisma.OrderItemUpdateManyWithoutPluginNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutPluginNestedInput
@@ -2219,6 +2408,7 @@ export type PluginUncheckedUpdateWithoutCategoryInput = {
   status?: Prisma.EnumPluginStatusFieldUpdateOperationsInput | $Enums.PluginStatus
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sellerId?: Prisma.StringFieldUpdateOperationsInput | string
+  subcategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2252,6 +2442,137 @@ export type PluginUncheckedUpdateManyWithoutCategoryInput = {
   status?: Prisma.EnumPluginStatusFieldUpdateOperationsInput | $Enums.PluginStatus
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sellerId?: Prisma.StringFieldUpdateOperationsInput | string
+  subcategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type PluginCreateManySubcategoryInput = {
+  id?: string
+  title: string
+  slug: string
+  description: string
+  shortDescription?: string | null
+  thumbnailUrl: string
+  videoUrl?: string | null
+  demoGifUrl: string
+  images?: Prisma.PluginCreateimagesInput | string[]
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: string
+  fileUrl: string
+  fileName: string
+  fileSize: number
+  version?: string
+  aeVersions?: Prisma.PluginCreateaeVersionsInput | string[]
+  operatingSystems?: Prisma.PluginCreateoperatingSystemsInput | string[]
+  downloadCount?: number
+  viewCount?: number
+  status?: $Enums.PluginStatus
+  featured?: boolean
+  sellerId: string
+  categoryId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  publishedAt?: Date | string | null
+  userId?: string | null
+}
+
+export type PluginUpdateWithoutSubcategoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  demoGifUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.PluginUpdateimagesInput | string[]
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.StringFieldUpdateOperationsInput | string
+  aeVersions?: Prisma.PluginUpdateaeVersionsInput | string[]
+  operatingSystems?: Prisma.PluginUpdateoperatingSystemsInput | string[]
+  downloadCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumPluginStatusFieldUpdateOperationsInput | $Enums.PluginStatus
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  seller?: Prisma.SellerUpdateOneRequiredWithoutPluginsNestedInput
+  category?: Prisma.CategoryUpdateOneRequiredWithoutPluginsNestedInput
+  tags?: Prisma.PluginTagUpdateManyWithoutPluginNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutPluginNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutPluginNestedInput
+  user?: Prisma.UserUpdateOneWithoutPluginsNestedInput
+}
+
+export type PluginUncheckedUpdateWithoutSubcategoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  demoGifUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.PluginUpdateimagesInput | string[]
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.StringFieldUpdateOperationsInput | string
+  aeVersions?: Prisma.PluginUpdateaeVersionsInput | string[]
+  operatingSystems?: Prisma.PluginUpdateoperatingSystemsInput | string[]
+  downloadCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumPluginStatusFieldUpdateOperationsInput | $Enums.PluginStatus
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sellerId?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.PluginTagUncheckedUpdateManyWithoutPluginNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutPluginNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutPluginNestedInput
+}
+
+export type PluginUncheckedUpdateManyWithoutSubcategoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thumbnailUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  demoGifUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  images?: Prisma.PluginUpdateimagesInput | string[]
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  version?: Prisma.StringFieldUpdateOperationsInput | string
+  aeVersions?: Prisma.PluginUpdateaeVersionsInput | string[]
+  operatingSystems?: Prisma.PluginUpdateoperatingSystemsInput | string[]
+  downloadCount?: Prisma.IntFieldUpdateOperationsInput | number
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumPluginStatusFieldUpdateOperationsInput | $Enums.PluginStatus
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sellerId?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2332,12 +2653,14 @@ export type PluginSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   featured?: boolean
   sellerId?: boolean
   categoryId?: boolean
+  subcategoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   publishedAt?: boolean
   userId?: boolean
   seller?: boolean | Prisma.SellerDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  subcategory?: boolean | Prisma.Plugin$subcategoryArgs<ExtArgs>
   tags?: boolean | Prisma.Plugin$tagsArgs<ExtArgs>
   orderItems?: boolean | Prisma.Plugin$orderItemsArgs<ExtArgs>
   reviews?: boolean | Prisma.Plugin$reviewsArgs<ExtArgs>
@@ -2370,12 +2693,14 @@ export type PluginSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   featured?: boolean
   sellerId?: boolean
   categoryId?: boolean
+  subcategoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   publishedAt?: boolean
   userId?: boolean
   seller?: boolean | Prisma.SellerDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  subcategory?: boolean | Prisma.Plugin$subcategoryArgs<ExtArgs>
   user?: boolean | Prisma.Plugin$userArgs<ExtArgs>
 }, ExtArgs["result"]["plugin"]>
 
@@ -2404,12 +2729,14 @@ export type PluginSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   featured?: boolean
   sellerId?: boolean
   categoryId?: boolean
+  subcategoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   publishedAt?: boolean
   userId?: boolean
   seller?: boolean | Prisma.SellerDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  subcategory?: boolean | Prisma.Plugin$subcategoryArgs<ExtArgs>
   user?: boolean | Prisma.Plugin$userArgs<ExtArgs>
 }, ExtArgs["result"]["plugin"]>
 
@@ -2438,16 +2765,18 @@ export type PluginSelectScalar = {
   featured?: boolean
   sellerId?: boolean
   categoryId?: boolean
+  subcategoryId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   publishedAt?: boolean
   userId?: boolean
 }
 
-export type PluginOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "shortDescription" | "thumbnailUrl" | "videoUrl" | "demoGifUrl" | "images" | "price" | "discountPrice" | "currency" | "fileUrl" | "fileName" | "fileSize" | "version" | "aeVersions" | "operatingSystems" | "downloadCount" | "viewCount" | "status" | "featured" | "sellerId" | "categoryId" | "createdAt" | "updatedAt" | "publishedAt" | "userId", ExtArgs["result"]["plugin"]>
+export type PluginOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "shortDescription" | "thumbnailUrl" | "videoUrl" | "demoGifUrl" | "images" | "price" | "discountPrice" | "currency" | "fileUrl" | "fileName" | "fileSize" | "version" | "aeVersions" | "operatingSystems" | "downloadCount" | "viewCount" | "status" | "featured" | "sellerId" | "categoryId" | "subcategoryId" | "createdAt" | "updatedAt" | "publishedAt" | "userId", ExtArgs["result"]["plugin"]>
 export type PluginInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   seller?: boolean | Prisma.SellerDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  subcategory?: boolean | Prisma.Plugin$subcategoryArgs<ExtArgs>
   tags?: boolean | Prisma.Plugin$tagsArgs<ExtArgs>
   orderItems?: boolean | Prisma.Plugin$orderItemsArgs<ExtArgs>
   reviews?: boolean | Prisma.Plugin$reviewsArgs<ExtArgs>
@@ -2457,11 +2786,13 @@ export type PluginInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type PluginIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   seller?: boolean | Prisma.SellerDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  subcategory?: boolean | Prisma.Plugin$subcategoryArgs<ExtArgs>
   user?: boolean | Prisma.Plugin$userArgs<ExtArgs>
 }
 export type PluginIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   seller?: boolean | Prisma.SellerDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  subcategory?: boolean | Prisma.Plugin$subcategoryArgs<ExtArgs>
   user?: boolean | Prisma.Plugin$userArgs<ExtArgs>
 }
 
@@ -2470,6 +2801,7 @@ export type $PluginPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     seller: Prisma.$SellerPayload<ExtArgs>
     category: Prisma.$CategoryPayload<ExtArgs>
+    subcategory: Prisma.$SubcategoryPayload<ExtArgs> | null
     tags: Prisma.$PluginTagPayload<ExtArgs>[]
     orderItems: Prisma.$OrderItemPayload<ExtArgs>[]
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
@@ -2500,6 +2832,7 @@ export type $PluginPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     featured: boolean
     sellerId: string
     categoryId: string
+    subcategoryId: string | null
     createdAt: Date
     updatedAt: Date
     publishedAt: Date | null
@@ -2900,6 +3233,7 @@ export interface Prisma__PluginClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   seller<T extends Prisma.SellerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SellerDefaultArgs<ExtArgs>>): Prisma.Prisma__SellerClient<runtime.Types.Result.GetResult<Prisma.$SellerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  subcategory<T extends Prisma.Plugin$subcategoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Plugin$subcategoryArgs<ExtArgs>>): Prisma.Prisma__SubcategoryClient<runtime.Types.Result.GetResult<Prisma.$SubcategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   tags<T extends Prisma.Plugin$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Plugin$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PluginTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orderItems<T extends Prisma.Plugin$orderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Plugin$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.Plugin$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Plugin$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2957,6 +3291,7 @@ export interface PluginFieldRefs {
   readonly featured: Prisma.FieldRef<"Plugin", 'Boolean'>
   readonly sellerId: Prisma.FieldRef<"Plugin", 'String'>
   readonly categoryId: Prisma.FieldRef<"Plugin", 'String'>
+  readonly subcategoryId: Prisma.FieldRef<"Plugin", 'String'>
   readonly createdAt: Prisma.FieldRef<"Plugin", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Plugin", 'DateTime'>
   readonly publishedAt: Prisma.FieldRef<"Plugin", 'DateTime'>
@@ -3354,6 +3689,25 @@ export type PluginDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many Plugins to delete.
    */
   limit?: number
+}
+
+/**
+ * Plugin.subcategory
+ */
+export type Plugin$subcategoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subcategory
+   */
+  select?: Prisma.SubcategorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subcategory
+   */
+  omit?: Prisma.SubcategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubcategoryInclude<ExtArgs> | null
+  where?: Prisma.SubcategoryWhereInput
 }
 
 /**
