@@ -44,28 +44,37 @@ const PluginCard = ({
               <Heart width={16} height={16} />
             </Button>
             <Button
-              variant="default"
-              className="p-2 h-8 bg-accent text-foreground rounded-[12px] hover:bg-accent/80"
+              variant="accent"
+              className="p-2 h-8 rounded-[12px] hover:bg-accent/80"
             >
               <ShoppingCart width={16} height={16} />
             </Button>
           </div>
         </div>
         <Link href={`/plugins/${plugin.slug}`}>
-          <div className="flex items-center justify-between">
+          <div className="flex items-baseline justify-between">
             <p className="font-bold text-lg md:text-xl mt-2">
               {" "}
               {plugin.title}{" "}
             </p>
-            <p className="font-bold text-sm md:text-base text-muted-foreground-secondary">
-              from $
-              {Number(plugin.discountPrice) === 0
-                ? plugin.price.toString()
-                : plugin.discountPrice.toString()}{" "}
-              {Number(plugin.discountPrice) !== 0 && (
-                <span className="line-through">${plugin.price.toString()}</span>
-              )}
-            </p>
+            {Number(plugin.price) === 0 && (
+              <div className="bg-accent text-accent-foreground border border-accent-border px-1 rounded-md font-semibold text-sm">
+                Free
+              </div>
+            )}
+            {Number(plugin.price) !== 0 && (
+              <p className="font-bold text-sm md:text-base text-muted-foreground-secondary">
+                from $
+                {Number(plugin.discountPrice) === 0
+                  ? plugin.price.toString()
+                  : plugin.discountPrice.toString()}{" "}
+                {Number(plugin.discountPrice) !== 0 && (
+                  <span className="line-through">
+                    ${plugin.price.toString()}
+                  </span>
+                )}
+              </p>
+            )}
           </div>
         </Link>
         <Link href={`/plugins/${plugin.slug}`}>
