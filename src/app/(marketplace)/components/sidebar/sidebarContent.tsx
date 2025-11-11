@@ -1,42 +1,25 @@
-"use client";
-
 import { cn } from "@/lib/utils/cn";
-import { useSidebar } from "../hooks/useSidebar";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { PLUGIN_CATEGORIES } from "@/lib/utils/constants";
-import { useEffect } from "react";
+import { prisma } from "@/lib/db/prisma";
 
-const Sidebar = ({ isMobileOnly }: { isMobileOnly?: boolean }) => {
-  const pathname = usePathname();
-  const activeSlug = pathname.split("/").pop();
+export default async function SidebarContent({
+  activePath,
+}: {
+  activePath: string;
+}) {
+  const categories = await prisma.category.findMany({
+    orderBy: { name: "asc" },
+  });
 
-  const { open } = useSidebar();
-
-  useEffect(() => {
-    if (open) {
-      document.body.classList.add("overflow-hidden");
-      return () => {
-        document.body.classList.remove("overflow-hidden");
-      };
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-  }, [open]);
-
+  const activeSlug = activePath.split("/").pop();
   return (
-    <aside
-      className={cn(
-        "sticky top-0 self-start z-50 h-screen md:flex flex-col p-4 border-r border-border w-64 overflow-y-auto",
-        isMobileOnly ? "md:hidden" : "",
-        open ? "block fixed top-14 left-0 z-50 w-full bg-background" : "hidden"
-      )}
-    >
+    <>
       <h5 className="text-sm font-semibold text-muted-foreground-secondary mb-2">
         CATALOG
       </h5>
       <div className="flex flex-col space-y-2">
-        {PLUGIN_CATEGORIES.map((category) => (
+        {categories.map((category) => (
           <Link
             key={category.id}
             href={`/catalog/${category.slug}`}
@@ -54,8 +37,6 @@ const Sidebar = ({ isMobileOnly }: { isMobileOnly?: boolean }) => {
           </Link>
         ))}
       </div>
-    </aside>
+    </>
   );
-};
-
-export default Sidebar;
+}

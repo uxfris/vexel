@@ -6,7 +6,7 @@ import PluginCard from "../../components/pluginCard";
 import { PLUGINS } from "@/lib/utils/constants";
 import Divider from "@/components/ui/divider";
 import Footer from "../../../../components/ui/footer";
-import Sidebar from "../../components/sidebar";
+import Sidebar from "../../components/sidebar/index";
 
 interface PluginPageProps {
   params: Promise<{ slug?: string[] }>;

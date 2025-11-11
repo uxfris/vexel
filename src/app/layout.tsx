@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Geist_Mono } from "next/font/google";
-import { LoginProvider } from "@/lib/hooks/useLogin";
 import LoginModal from "@/components/shared/login";
 import { ModalProvider } from "@/lib/hooks/useModal";
 

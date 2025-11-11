@@ -120,6 +120,17 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
+model Otp {
+  id        String   @id @default(cuid())
+  email     String
+  codehash  String
+  createdAt DateTime @default(now())
+  expiredAt DateTime
+  consumed  Boolean  @default(false)
+
+  @@index([email])
+}
+
 // ============================================
 // PLUGIN
 // ============================================

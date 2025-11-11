@@ -1,4 +1,4 @@
-import Sidebar from "../components/sidebar";
+import Sidebar from "../components/sidebar/index";
 import Navbar from "../components/navbar";
 import { SidebarProvider } from "../hooks/useSidebar";
 

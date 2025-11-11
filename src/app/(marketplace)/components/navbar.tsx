@@ -23,7 +23,6 @@ const Navbar = () => {
   const { open, toggle } = useSidebar();
   const { openModal } = useModal();
   const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) => {
@@ -37,10 +36,10 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    if (!isMobile) return;
+
+    let lastScrollY = window.scrollY;
     const handleScroll = () => {
-      if (!isMobile) {
-        return;
-      }
       const currentScrollY = window.scrollY;
 
       // Always show navbar when at the top
@@ -54,14 +53,14 @@ const Navbar = () => {
         setShowNavbar(true);
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollY = currentScrollY;
     };
 
     // if (isMobile) {
     window.addEventListener("scroll", handleScroll, { passive: true });
     // }
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isMobile, lastScrollY]);
+  }, [isMobile]);
 
   function openSearchModal() {
     openModal(<SearchPluginModal />, { className: "rounded-none" });
