@@ -65,20 +65,38 @@ model User {
   stripeConnectStatus Boolean @default(false)
 
   // Relationships
+  seller   Seller?
   accounts Account[]
   sessions Session[]
-  plugins  Plugin[]
   orders   Order[]
   reviews  Review[]
   payouts  Payout[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  plugins   Plugin[]
 
   @@index([email])
   @@index([stripeCustomerId])
   @@index([stripeConnectId])
   @@map("users")
+}
+
+model Seller {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  bio       String?  @db.Text
+  website   String?
+  twitter   String?
+  instagram String?
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  plugins   Plugin[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("sellers")
 }
 
 model Account {
@@ -145,12 +163,13 @@ model Plugin {
   // Media
   thumbnailUrl String
   videoUrl     String?
-  demoGifUrl   String?
+  demoGifUrl   String
   images       String[] // Array of image URLs
 
   // Pricing
-  price    Decimal @db.Decimal(10, 2)
-  currency String  @default("USD")
+  price         Decimal @db.Decimal(10, 2)
+  discountPrice Decimal @default(0) @db.Decimal(10, 2)
+  currency      String  @default("USD")
 
   // Technical details
   fileUrl  String // S3 URL
@@ -170,7 +189,7 @@ model Plugin {
 
   // Relationships
   sellerId String
-  seller   User   @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  seller   Seller @relation(fields: [sellerId], references: [id], onDelete: Cascade)
 
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])
@@ -182,6 +201,8 @@ model Plugin {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   publishedAt DateTime?
+  user        User?     @relation(fields: [userId], references: [id])
+  userId      String?
 
   @@index([sellerId])
   @@index([categoryId])

@@ -2,8 +2,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart } from "lucide-react";
+import { Plugin } from "@/types";
+import { Category, Seller } from "@/lib/prisma/client";
+import { PluginWithSeller } from "@/types/plugin";
 
-const PluginCard = ({ plugin }: { plugin: any }) => {
+const PluginCard = ({
+  plugin,
+  category,
+  seller,
+}: {
+  plugin: PluginWithSeller;
+  category: Category;
+  seller: Pick<Seller, "name" | "slug">;
+}) => {
   return (
     <div className="flex flex-col w-full">
       <div className="group flex flex-col">
@@ -11,17 +22,18 @@ const PluginCard = ({ plugin }: { plugin: any }) => {
           <Link href={`/plugins/${plugin.slug}`}>
             <div className="relative w-full h-full">
               <Image
-                src={plugin.images[0]}
+                src={plugin.thumbnailUrl}
                 alt="Product Image"
                 width={560}
                 height={560}
                 className="w-full h-full object-cover rounded-lg group-hover:opacity-0 duration-500 transition-opacity"
               />
               <Image
-                src={plugin.images[1]}
+                src={plugin.demoGifUrl}
                 alt="Product Image"
                 width={560}
                 height={560}
+                unoptimized
                 className="w-full h-full object-cover rounded-lg absolute top-0 left-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
               />
             </div>
@@ -43,9 +55,18 @@ const PluginCard = ({ plugin }: { plugin: any }) => {
         </div>
         <Link href={`/plugins/${plugin.slug}`}>
           <div className="flex items-center justify-between">
-            <p className="font-bold text-lg md:text-xl mt-2"> {plugin.name} </p>
+            <p className="font-bold text-lg md:text-xl mt-2">
+              {" "}
+              {plugin.title}{" "}
+            </p>
             <p className="font-bold text-sm md:text-base text-muted-foreground-secondary">
-              from $10 <span className="line-through">$20</span>
+              from $
+              {Number(plugin.discountPrice) === 0
+                ? plugin.price.toString()
+                : plugin.discountPrice.toString()}{" "}
+              {Number(plugin.discountPrice) !== 0 && (
+                <span className="line-through">${plugin.price.toString()}</span>
+              )}
             </p>
           </div>
         </Link>
@@ -58,17 +79,17 @@ const PluginCard = ({ plugin }: { plugin: any }) => {
       <p className="text-muted-foreground-secondary font-medium mt-2">
         By{" "}
         <Link
-          href={`/creator/creator-slug`}
+          href={`/creator/${seller.slug}`}
           className="font-bold text-foreground"
         >
-          {plugin.creator}
+          {seller.name}
         </Link>{" "}
         in{" "}
         <Link
-          href={`/catalog/category-slug`}
+          href={`/catalog/${category.slug}`}
           className="font-bold text-foreground"
         >
-          {plugin.category}
+          {category.name}
         </Link>
       </p>
     </div>

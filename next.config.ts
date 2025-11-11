@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cfw6.b-cdn.net",
       },
+      {
+        protocol: "https",
+        hostname: "**.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "media.giphy.com",
+      },
     ],
   },
   experimental: {
