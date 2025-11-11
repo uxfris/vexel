@@ -1,20 +1,42 @@
+"use client";
+
 import { cn } from "@/lib/utils/cn";
 import Link from "next/link";
-import { PLUGIN_CATEGORIES } from "@/lib/utils/constants";
-import { prisma } from "@/lib/db/prisma";
+import { usePathname } from "next/navigation";
+import { useSidebar } from "../../hooks/useSidebar";
+import { useEffect } from "react";
+import { Category } from "@/lib/prisma/client";
 
-export default async function SidebarContent({
-  activePath,
+export default function SidebarContent({
+  categories,
+  isMobileOnly,
 }: {
-  activePath: string;
+  categories: Category[];
+  isMobileOnly?: boolean;
 }) {
-  const categories = await prisma.category.findMany({
-    orderBy: { name: "asc" },
-  });
+  const pathname = usePathname();
+  const activeSlug = pathname.split("/").pop();
+  const { open } = useSidebar();
 
-  const activeSlug = activePath.split("/").pop();
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add("overflow-hidden");
+      return () => {
+        document.body.classList.remove("overflow-hidden");
+      };
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [open]);
+
   return (
-    <>
+    <aside
+      className={cn(
+        "sticky top-0 self-start z-50 h-screen md:flex flex-col p-4 border-r border-border w-64 overflow-y-auto",
+        isMobileOnly ? "md:hidden" : "",
+        open ? "block fixed top-14 left-0 z-50 w-full bg-background" : "hidden"
+      )}
+    >
       <h5 className="text-sm font-semibold text-muted-foreground-secondary mb-2">
         CATALOG
       </h5>
@@ -37,6 +59,6 @@ export default async function SidebarContent({
           </Link>
         ))}
       </div>
-    </>
+    </aside>
   );
 }
