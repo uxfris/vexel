@@ -2,16 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart } from "lucide-react";
-import { Plugin } from "@/types";
-import { Category, Seller } from "@/lib/prisma/client";
-import { PluginWithSeller } from "@/types/plugin";
+import { Category, Plugin, Seller } from "@/lib/prisma/client";
 
 const PluginCard = ({
   plugin,
   category,
   seller,
 }: {
-  plugin: PluginWithSeller;
+  plugin: Plugin;
   category: Category;
   seller: Pick<Seller, "name" | "slug">;
 }) => {

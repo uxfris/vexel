@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/db/prisma";
 import Header from "../../components/header";
 import PluginCard from "../../components/pluginCard";
-import CatalogPluginList from "../../components/catalogPluginList";
 
 export default async function CatalogPage({
   params,
@@ -16,6 +15,11 @@ export default async function CatalogPage({
 
   const category = await prisma.category.findFirst({
     where: { slug: slugValue },
+    include: {
+      plugins: {
+        include: { seller: { select: { name: true, slug: true } } },
+      },
+    },
   });
 
   const subCategories =
@@ -25,10 +29,21 @@ export default async function CatalogPage({
   return (
     <>
       <Header
-        category={category?.name ?? "Explore Catalog"}
+        category={
+          slug ? (category?.name ?? "Explore Catalog") : "Explore Catalog"
+        }
         activeSubCategories={subCategories}
       />
-      <CatalogPluginList category={category!} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-8 gap-y-10 md:gap-y-15 mb-15">
+        {category?.plugins.map((plugin) => (
+          <PluginCard
+            key={plugin.id}
+            plugin={plugin}
+            category={category}
+            seller={plugin.seller}
+          />
+        ))}
+      </div>
     </>
   );
 }
