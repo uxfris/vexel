@@ -1,88 +1,93 @@
-import { Prisma } from "../prisma/client";
-import { prisma } from "./prisma";
+// lib/queries/pluginQueryBuilder.ts
+import { prisma } from "@/lib/db/prisma";
+import { Decimal } from "@prisma/client/runtime/library";
+
+interface PluginQueryOptions {
+  slug?: string;
+  pricing?: "free" | "paid" | "paid_free";
+  sort?: "popular" | "recent";
+  subcategories?: string[];
+  featured?: boolean;
+  page?: number;
+  limit?: number;
+}
+
+// Helper function to serialize Decimal fields to numbers
+function serializePlugin(plugin: any) {
+  return {
+    ...plugin,
+    price:
+      plugin.price instanceof Decimal
+        ? Number(plugin.price)
+        : (plugin.price ?? null),
+    discountPrice:
+      plugin.discountPrice instanceof Decimal
+        ? Number(plugin.discountPrice)
+        : (plugin.discountPrice ?? null),
+  };
+}
 
 export async function getPlugins({
   slug,
-  pricing,
-  sort,
-  subcategories,
-}: {
-  slug?: string;
-  pricing?: "free" | "paid" | "paid_free";
-  sort: "recent" | "popular";
-  subcategories?: string[];
-}) {
-  const sortOptions: Record<string, Prisma.PluginOrderByWithRelationInput> = {
-    popular: { downloadCount: "desc" },
-    recent: { createdAt: "desc" },
-  };
-  const sortOption = sortOptions[sort] ?? sortOptions.recent;
-
-  const priceFilter =
-    pricing === "free"
+  pricing = "paid_free",
+  sort = "recent",
+  subcategories = [],
+  featured,
+  page = 1,
+  limit = 20,
+}: PluginQueryOptions) {
+  const where: any = {
+    ...(pricing === "free"
       ? { price: 0 }
       : pricing === "paid"
-        ? {
-            price: { gt: 0 },
-          }
-        : {};
+        ? { price: { gt: 0 } }
+        : {}),
+    ...(subcategories.length > 0
+      ? { subcategoryId: { in: subcategories } }
+      : {}),
+    ...(featured !== undefined ? { featured } : {}),
+  };
 
-  if (slug === "featured") {
-    const plugins = await prisma.plugin.findMany({
-      where: { featured: true, ...priceFilter },
+  // If slug provided, fetch plugins from that category
+  if (slug) {
+    const category = await prisma.category.findFirst({
+      where: { slug },
       include: {
-        seller: { select: { name: true, slug: true } },
-        category: true,
-      },
-      orderBy: sortOption,
-    });
-    return { category: null, plugins };
-  }
-  if (!slug) {
-    const plugins = await prisma.plugin.findMany({
-      where: {
-        ...priceFilter,
-        ...((subcategories?.length ?? 0 > 0)
-          ? { subcategoryId: { in: subcategories } }
-          : {}),
-      },
-      include: {
-        seller: { select: { name: true, slug: true } },
-        category: true,
-      },
-      orderBy: sortOption,
-    });
-
-    return { category: null, plugins };
-  }
-
-  const category = await prisma.category.findFirst({
-    where: { slug },
-    include: {
-      subcategories: true,
-      plugins: {
-        where: {
-          ...priceFilter,
-          ...(subcategories?.length
-            ? {
-                subCategoryId: {
-                  in: subcategories,
-                },
-              }
-            : {}),
-        },
-        include: {
-          seller: {
-            select: {
-              name: true,
-              slug: true,
-            },
+        subcategories: true,
+        plugins: {
+          where,
+          include: {
+            category: true,
+            seller: { select: { name: true, slug: true } },
           },
-          category: true,
+          orderBy:
+            sort === "popular"
+              ? { downloadCount: "desc" }
+              : { createdAt: "desc" },
+          skip: (page - 1) * limit,
+          take: limit,
         },
-        orderBy: sortOption,
       },
+    });
+
+    return {
+      category,
+      plugins: (category?.plugins ?? []).map(serializePlugin),
+    };
+  }
+
+  // Otherwise, fetch all plugins
+  const plugins = await prisma.plugin.findMany({
+    where,
+    include: {
+      category: true,
+      seller: { select: { name: true, slug: true } },
     },
+    orderBy:
+      sort === "popular" ? { downloadCount: "desc" } : { createdAt: "desc" },
+    skip: (page - 1) * limit,
+    take: limit,
   });
-  return { category, plugins: category?.plugins ?? [] };
+
+  return { category: null, plugins: plugins.map(serializePlugin) };
 }

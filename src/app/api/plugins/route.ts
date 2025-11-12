@@ -1,23 +1,24 @@
-import { prisma } from "@/lib/db/prisma";
+// app/api/plugins/route.ts
 import { NextResponse } from "next/server";
+import { getPlugins } from "@/lib/db/getPlugins";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const categorySlug = searchParams.get("category");
-  const skip = parseInt(searchParams.get("skip") || "0", 10);
-  const limit = parseInt(searchParams.get("limit") || "12", 10);
 
-  const category = await prisma.category.findFirst({
-    where: { slug: categorySlug || undefined },
+  const slug = searchParams.get("slug") || undefined;
+  const pricing = (searchParams.get("pricing") || "paid_free") as any;
+  const sort = (searchParams.get("sort") || "recent") as any;
+  const subcategories = searchParams.get("subcategories")?.split(",") ?? [];
+  const page = parseInt(searchParams.get("page") || "1");
+  const limit = parseInt(searchParams.get("limit") || "20");
+
+  const data = await getPlugins({
+    slug,
+    pricing,
+    sort,
+    subcategories,
+    page,
+    limit,
   });
-
-  const plugins = await prisma.plugin.findMany({
-    where: { categoryId: category?.id },
-    include: { seller: { select: { name: true, slug: true } } },
-    skip,
-    take: limit,
-    orderBy: { createdAt: "desc" },
-  });
-
-  return NextResponse.json(plugins);
+  return NextResponse.json(data);
 }

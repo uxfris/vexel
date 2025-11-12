@@ -7,6 +7,7 @@ import {
   normalizeSort,
   normalizeSubcategories,
 } from "@/lib/utils/normalizeFilters";
+import PluginGrid from "../../components/pluginGrid";
 
 export default async function CatalogPage({
   params,
@@ -51,16 +52,13 @@ export default async function CatalogPage({
         subcategories={category?.subcategories ?? []}
         activeSubcategories={subcategories}
       />
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-8 gap-y-10 md:gap-y-15 mb-15">
-        {plugins.map((plugin) => (
-          <PluginCard
-            key={plugin.id}
-            plugin={plugin}
-            category={category ?? plugin.category}
-            seller={plugin.seller}
-          />
-        ))}
-      </div>
+      <PluginGrid
+        initialPlugins={plugins}
+        slug={slugValue}
+        pricing={pricing}
+        sort={sort}
+        subcategories={subcategories}
+      />
     </>
   );
 }

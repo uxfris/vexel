@@ -34,30 +34,6 @@ const Header = ({
     useState<string[]>(activeSubcategories);
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
-    let shouldUpdate = false;
-
-    // default filters if not present
-    if (!params.has("sort")) {
-      params.set("sort", "recent");
-      shouldUpdate = true;
-    }
-
-    if (!params.has("pricing")) {
-      params.set("pricing", "paid_free");
-      shouldUpdate = true;
-    }
-
-    if (shouldUpdate) {
-      router.replace(`?${params.toString()}`);
-    }
-
-    // sync active tags
-    const current = searchParams.get("subcategories");
-    setActiveSubcat(current ? current.split(",") : []);
-  }, [searchParams, router]);
-
-  useEffect(() => {
     const current = searchParams.get("subcategories");
 
     setActiveSubcat(current ? current.split(",") : []);
