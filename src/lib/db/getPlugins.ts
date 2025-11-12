@@ -1,6 +1,7 @@
 // lib/queries/pluginQueryBuilder.ts
 import { prisma } from "@/lib/db/prisma";
 import { Decimal } from "@prisma/client/runtime/library";
+import { serializePlugin } from "../utils/serializePlugin";
 
 interface PluginQueryOptions {
   slug?: string;
@@ -10,21 +11,6 @@ interface PluginQueryOptions {
   featured?: boolean;
   page?: number;
   limit?: number;
-}
-
-// Helper function to serialize Decimal fields to numbers
-function serializePlugin(plugin: any) {
-  return {
-    ...plugin,
-    price:
-      plugin.price instanceof Decimal
-        ? Number(plugin.price)
-        : (plugin.price ?? null),
-    discountPrice:
-      plugin.discountPrice instanceof Decimal
-        ? Number(plugin.discountPrice)
-        : (plugin.discountPrice ?? null),
-  };
 }
 
 export async function getPlugins({

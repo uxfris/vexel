@@ -9,10 +9,16 @@ import { cn } from "@/lib/utils/cn";
 import { useMedia } from "use-media";
 import Divider from "@/components/ui/divider";
 import { useEffect, useRef, useState } from "react";
+import { Plugin } from "@/lib/prisma/client";
 
-export function PluginDetail({ plugin }: any) {
+type SerializedPlugin = Omit<Plugin, "price" | "discountPrice"> & {
+  price: number | null;
+  discountPrice: number | null;
+};
+
+export function PluginDetail(plugin: SerializedPlugin) {
   const isMobile = useMedia({ maxWidth: 767 });
-  const demoImages = plugin.demoImages;
+  const demoImages = plugin.images;
   const displayedImages = isMobile ? demoImages.slice(0, 4) : demoImages;
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -67,7 +73,7 @@ export function PluginDetail({ plugin }: any) {
             {plugin.title}
           </h1>
           <p className="hidden md:block font-medium text-lg text-muted-foreground mb-2">
-            {plugin.shortDesc}
+            {plugin.shortDescription}
           </p>
           <Button
             onClick={() => setModalOpen(true)}
@@ -79,11 +85,13 @@ export function PluginDetail({ plugin }: any) {
           </Button>
           <div className="flex gap-2 flex-col md:flex-row">
             <MenuButtonItems icon={Info} title="Info" onClick={() => {}} />
-            <MenuButtonItems
-              icon={DownloadCloud}
-              title="Trial"
-              onClick={() => {}}
-            />
+            {plugin.price !== 0 && (
+              <MenuButtonItems
+                icon={DownloadCloud}
+                title="Trial"
+                onClick={() => {}}
+              />
+            )}
             <MenuButtonItems icon={Heart} title="Save" onClick={() => {}} />
           </div>
         </div>
@@ -122,7 +130,7 @@ export function PluginDetail({ plugin }: any) {
             <StickyHeader plugin={plugin} scrollRef={modalScrollRef} />
             <Divider classNames="mb-7" />
             <div className="max-w-6xl mx-auto space-y-6 mb-20 px-4">
-              {plugin.demoImages.map((image: string, index: number) => (
+              {plugin.images.map((image: string, index: number) => (
                 <Image
                   key={image}
                   data-index={index}
@@ -145,7 +153,7 @@ function StickyHeader({
   plugin,
   scrollRef,
 }: {
-  plugin: any;
+  plugin: SerializedPlugin;
   scrollRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const [scrolled, setScrolled] = useState(false);
@@ -181,7 +189,7 @@ function StickyHeader({
             {plugin.title}
           </h1>
           <p className="hidden md:block font-medium text-lg text-muted-foreground mb-2">
-            {plugin.shortDesc}
+            {plugin.shortDescription}
           </p>
         </div>
         <div className="flex gap-2">
@@ -195,7 +203,6 @@ function StickyHeader({
           <ShoppingCartButton
             plugin={plugin}
             classNames="h-9 text-sm md:text-base md:px-3 md:py-2 md:h-10"
-            showActualPrice={false}
           />
         </div>
       </div>
@@ -206,12 +213,11 @@ function StickyHeader({
 function ShoppingCartButton({
   plugin,
   classNames,
-  showActualPrice = true,
 }: {
-  plugin: any;
+  plugin: SerializedPlugin;
   classNames?: string;
-  showActualPrice?: boolean;
 }) {
+  const isDiscount = plugin.discountPrice !== 0;
   return (
     <Button
       size="lg"
@@ -222,8 +228,10 @@ function ShoppingCartButton({
       )}
     >
       <ShoppingCart />
-      Buy From ${plugin.discount_price}{" "}
-      {showActualPrice && (
+      {plugin.price === 0
+        ? "Get for Free"
+        : `Buy From ${isDiscount ? plugin.discountPrice : plugin.price}{" "}`}
+      {isDiscount && (
         <span className="text-muted-foreground-secondary line-through">
           ${plugin.price}
         </span>
@@ -238,12 +246,15 @@ function Creator({ plugin, classNames }: { plugin: any; classNames: string }) {
       className={cn("font-semibold text-sm text-muted-foreground", classNames)}
     >
       by{" "}
-      <Link href={"/creator/creator-slug"} className="text-foreground">
-        {plugin.creator.name}
+      <Link href={`/creator/${plugin.seller.slug}`} className="text-foreground">
+        {plugin.seller.name}
       </Link>{" "}
       in{" "}
-      <Link href={"/catalog/category-slug"} className="text-foreground">
-        {plugin.category}
+      <Link
+        href={`/catalog/${plugin.category.slug}`}
+        className="text-foreground"
+      >
+        {plugin.category.name}
       </Link>
     </p>
   );
