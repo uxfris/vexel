@@ -16,6 +16,7 @@ export default async function CatalogPage({
 }) {
   const { slug } = await params;
   const resolveSearchParams = await searchParams;
+
   const slugValue = slug?.[0];
 
   const pricing = normalizePricing(
@@ -45,7 +46,7 @@ export default async function CatalogPage({
     <>
       <Header
         category={
-          slug ? (category?.name ?? "Explore Catalog") : "Explore Catalog"
+          slug ? (category?.name ?? "Explore Plugins") : "Explore Plugins"
         }
         subcategories={category?.subcategories ?? []}
         activeSubcategories={subcategories}
