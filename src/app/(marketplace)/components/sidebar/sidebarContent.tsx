@@ -16,7 +16,7 @@ export default function SidebarContent({
 }) {
   const pathname = usePathname();
   const activeSlug = pathname.split("/").pop();
-  const { open } = useSidebar();
+  const { open, close } = useSidebar();
 
   useEffect(() => {
     if (open) {
@@ -44,6 +44,7 @@ export default function SidebarContent({
         {categories.map((category) => (
           <Link
             key={category.id}
+            onClick={close}
             href={`/catalog/${category.slug}`}
             className={cn(
               "flex items-center gap-3 pl-0 rounded-md cursor-pointer hover:bg-sidebar-primary transition-colors duration-200",
