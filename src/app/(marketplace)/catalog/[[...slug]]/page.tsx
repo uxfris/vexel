@@ -1,6 +1,4 @@
-import { prisma } from "@/lib/db/prisma";
 import Header from "../../components/header";
-import PluginCard from "../../components/pluginCard";
 import { getPlugins } from "@/lib/db/getPlugins";
 import {
   normalizePricing,

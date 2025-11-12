@@ -29,11 +29,11 @@ export default function Loading() {
       <div className="h-px border-b border-border mb-10"></div>
 
       {/* Plugin Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-8 gap-y-10 md:gap-y-15 mb-15">
+      {/* <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-8 gap-y-10 md:gap-y-15 mb-15">
         {Array.from({ length: 8 }).map((_, i) => (
           <PluginSkeleton key={i} />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
