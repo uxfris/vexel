@@ -9,7 +9,7 @@ import {
   Store,
   XIcon,
 } from "lucide-react";
-import { useSidebar } from "../hooks/use-sidebar";
+import { useSidebar } from "../_hooks/use-sidebar";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils/cn";
 import { useMedia } from "use-media";

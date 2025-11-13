@@ -1,6 +1,6 @@
 import Divider from "@/components/ui/divider";
 import Footer from "@/components/ui/footer";
-import Sidebar from "../components/sidebar";
+import Sidebar from "../_components/sidebar";
 
 export default function Loading() {
   return (
