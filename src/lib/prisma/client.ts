@@ -67,10 +67,10 @@ export type Session = Prisma.SessionModel
  */
 export type VerificationToken = Prisma.VerificationTokenModel
 /**
- * Model Otp
+ * Model OTP
  * 
  */
-export type Otp = Prisma.OtpModel
+export type OTP = Prisma.OTPModel
 /**
  * Model Plugin
  * 

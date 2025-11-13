@@ -28,7 +28,7 @@ async function main() {
   await prisma.subcategory.deleteMany();
   await prisma.category.deleteMany();
   await prisma.seller.deleteMany();
-  await prisma.otp.deleteMany();
+  await prisma.oTP.deleteMany();
   await prisma.verificationToken.deleteMany();
   await prisma.session.deleteMany();
   await prisma.account.deleteMany();
@@ -952,11 +952,11 @@ Features:
   // ============================================
   console.log("📧 Creating test OTP...");
 
-  await prisma.otp.create({
+  await prisma.oTP.create({
     data: {
       email: "test@example.com",
-      codehash: await hash("123456", 12),
-      expiredAt: new Date(Date.now() + 10 * 60 * 1000), // 10 minutes
+      hashedCode: await hash("123456", 12),
+      expiresAt: new Date(Date.now() + 10 * 60 * 1000), // 10 minutes
     },
   });
 

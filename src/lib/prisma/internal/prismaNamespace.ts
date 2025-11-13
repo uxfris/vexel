@@ -395,7 +395,7 @@ export const ModelName = {
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',
-  Otp: 'Otp',
+  OTP: 'OTP',
   Plugin: 'Plugin',
   Category: 'Category',
   Subcategory: 'Subcategory',
@@ -422,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "seller" | "account" | "session" | "verificationToken" | "otp" | "plugin" | "category" | "subcategory" | "tag" | "pluginTag" | "order" | "orderItem" | "licenseKey" | "review" | "payout" | "pluginView"
+    modelProps: "user" | "seller" | "account" | "session" | "verificationToken" | "oTP" | "plugin" | "category" | "subcategory" | "tag" | "pluginTag" | "order" | "orderItem" | "licenseKey" | "review" | "payout" | "pluginView"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -796,77 +796,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Otp: {
-      payload: Prisma.$OtpPayload<ExtArgs>
-      fields: Prisma.OtpFieldRefs
+    OTP: {
+      payload: Prisma.$OTPPayload<ExtArgs>
+      fields: Prisma.OTPFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.OtpFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload> | null
+          args: Prisma.OTPFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.OtpFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>
+          args: Prisma.OTPFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>
         }
         findFirst: {
-          args: Prisma.OtpFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload> | null
+          args: Prisma.OTPFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.OtpFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>
+          args: Prisma.OTPFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>
         }
         findMany: {
-          args: Prisma.OtpFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>[]
+          args: Prisma.OTPFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>[]
         }
         create: {
-          args: Prisma.OtpCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>
+          args: Prisma.OTPCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>
         }
         createMany: {
-          args: Prisma.OtpCreateManyArgs<ExtArgs>
+          args: Prisma.OTPCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.OtpCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>[]
+          args: Prisma.OTPCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>[]
         }
         delete: {
-          args: Prisma.OtpDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>
+          args: Prisma.OTPDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>
         }
         update: {
-          args: Prisma.OtpUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>
+          args: Prisma.OTPUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>
         }
         deleteMany: {
-          args: Prisma.OtpDeleteManyArgs<ExtArgs>
+          args: Prisma.OTPDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.OtpUpdateManyArgs<ExtArgs>
+          args: Prisma.OTPUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.OtpUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>[]
+          args: Prisma.OTPUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>[]
         }
         upsert: {
-          args: Prisma.OtpUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>
+          args: Prisma.OTPUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OTPPayload>
         }
         aggregate: {
-          args: Prisma.OtpAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateOtp>
+          args: Prisma.OTPAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOTP>
         }
         groupBy: {
-          args: Prisma.OtpGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.OtpGroupByOutputType>[]
+          args: Prisma.OTPGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OTPGroupByOutputType>[]
         }
         count: {
-          args: Prisma.OtpCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.OtpCountAggregateOutputType> | number
+          args: Prisma.OTPCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OTPCountAggregateOutputType> | number
         }
       }
     }
@@ -1729,7 +1729,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   emailVerified: 'emailVerified',
   passwordHash: 'passwordHash',
-  avatar: 'avatar',
+  image: 'image',
   role: 'role',
   bio: 'bio',
   website: 'website',
@@ -1790,6 +1790,7 @@ export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeo
 
 
 export const VerificationTokenScalarFieldEnum = {
+  id: 'id',
   identifier: 'identifier',
   token: 'token',
   expires: 'expires'
@@ -1798,16 +1799,16 @@ export const VerificationTokenScalarFieldEnum = {
 export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
 
 
-export const OtpScalarFieldEnum = {
+export const OTPScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  codehash: 'codehash',
+  hashedCode: 'hashedCode',
   createdAt: 'createdAt',
-  expiredAt: 'expiredAt',
+  expiresAt: 'expiresAt',
   consumed: 'consumed'
 } as const
 
-export type OtpScalarFieldEnum = (typeof OtpScalarFieldEnum)[keyof typeof OtpScalarFieldEnum]
+export type OTPScalarFieldEnum = (typeof OTPScalarFieldEnum)[keyof typeof OTPScalarFieldEnum]
 
 
 export const PluginScalarFieldEnum = {
@@ -2239,7 +2240,7 @@ export type GlobalOmitConfig = {
   account?: Prisma.AccountOmit
   session?: Prisma.SessionOmit
   verificationToken?: Prisma.VerificationTokenOmit
-  otp?: Prisma.OtpOmit
+  oTP?: Prisma.OTPOmit
   plugin?: Prisma.PluginOmit
   category?: Prisma.CategoryOmit
   subcategory?: Prisma.SubcategoryOmit

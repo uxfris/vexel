@@ -54,7 +54,7 @@ export const ModelName = {
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',
-  Otp: 'Otp',
+  OTP: 'OTP',
   Plugin: 'Plugin',
   Category: 'Category',
   Subcategory: 'Subcategory',
@@ -90,7 +90,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   emailVerified: 'emailVerified',
   passwordHash: 'passwordHash',
-  avatar: 'avatar',
+  image: 'image',
   role: 'role',
   bio: 'bio',
   website: 'website',
@@ -151,6 +151,7 @@ export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeo
 
 
 export const VerificationTokenScalarFieldEnum = {
+  id: 'id',
   identifier: 'identifier',
   token: 'token',
   expires: 'expires'
@@ -159,16 +160,16 @@ export const VerificationTokenScalarFieldEnum = {
 export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
 
 
-export const OtpScalarFieldEnum = {
+export const OTPScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  codehash: 'codehash',
+  hashedCode: 'hashedCode',
   createdAt: 'createdAt',
-  expiredAt: 'expiredAt',
+  expiresAt: 'expiresAt',
   consumed: 'consumed'
 } as const
 
-export type OtpScalarFieldEnum = (typeof OtpScalarFieldEnum)[keyof typeof OtpScalarFieldEnum]
+export type OTPScalarFieldEnum = (typeof OTPScalarFieldEnum)[keyof typeof OTPScalarFieldEnum]
 
 
 export const PluginScalarFieldEnum = {
