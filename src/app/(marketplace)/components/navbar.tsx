@@ -17,8 +17,10 @@ import Brand from "@/components/ui/brand";
 import { useModal } from "@/lib/hooks/useModal";
 import SearchPluginModal from "./searchPluginModal";
 import LoginModal from "@/components/shared/login";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
+  const { data: session } = useSession();
   const isMobile = useMedia({ maxWidth: 767 });
   const { open, toggle } = useSidebar();
   const { openModal } = useModal();
@@ -74,7 +76,7 @@ const Navbar = () => {
         showNavbar ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
       )}
     >
-      <div className="flex items-center justify-between px-4 py-2">
+      <div className="flex items-center justify-between pl-4 pr-8 py-2">
         <div className="flex items-center gap-2 md:gap-8">
           <Button
             variant="ghost"
@@ -122,34 +124,41 @@ const Navbar = () => {
             Search Plugins
           </span>
         </button>
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-6">
           <Link href="/sell" className="hidden md:block">
-            <p className="text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer">
+            <Button variant="ghost" className="p-0">
               Sell Plugins
-            </p>
+            </Button>
           </Link>
-          <Link href="/pricing" className="md:hidden">
+          {/* <Link href="/pricing" className="md:hidden">
             <Store className="w-5 h-5 text-muted-foreground hover:text-foreground cursor-pointer" />
-          </Link>
+          </Link> */}
           {/* <Link href="/pricing" className="hidden md:block">
             <Button variant="outline" size="sm">
               <p className="text-sm font-medium">pricing</p>
             </Button>
           </Link> */}
-
+          {session && (
+            <Button variant="ghost" className="p-0">
+              My Account
+            </Button>
+          )}
           <Link href="/cart">
             <ShoppingCartIcon className="w-5 h-5 text-muted-foreground hover:text-foreground cursor-pointer" />
           </Link>
-          <Button
-            variant="ghost"
-            onClick={() =>
-              openModal(<LoginModal />, {
-                className: "max-w-96",
-              })
-            }
-          >
-            Login
-          </Button>
+          {!session && (
+            <Button
+              variant="ghost"
+              className="p-0"
+              onClick={() =>
+                openModal(<LoginModal />, {
+                  className: "max-w-96",
+                })
+              }
+            >
+              Login
+            </Button>
+          )}
         </div>
       </div>
     </header>

@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import { Metadata } from "next";
 import Breadcrumb from "../../components/breadcrumb";
 import { PluginDetail } from "../components/plugin-detail";
@@ -49,10 +48,6 @@ export async function generateMetadata({
 }
 
 export default async function PluginDetailPage({ params }: PluginPageProps) {
-  const session = await auth();
-
-  console.log(session?.user);
-
   const { slug } = await params;
   const slugValue = slug?.[0];
 

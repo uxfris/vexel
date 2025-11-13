@@ -4,6 +4,7 @@ import "./globals.css";
 import { Geist_Mono } from "next/font/google";
 import LoginModal from "@/components/shared/login";
 import { ModalProvider } from "@/lib/hooks/useModal";
+import { SessionProvider } from "next-auth/react";
 
 const euclid = localFont({
   src: [
@@ -79,7 +80,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${euclid.variable} ${geistMono.variable} antialiased`}>
-        <ModalProvider>{children}</ModalProvider>
+        <SessionProvider>
+          <ModalProvider>{children}</ModalProvider>
+        </SessionProvider>
       </body>
     </html>
   );
