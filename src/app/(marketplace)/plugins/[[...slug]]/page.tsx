@@ -1,9 +1,9 @@
+import { auth } from "@/auth";
 import { Metadata } from "next";
 import Breadcrumb from "../../components/breadcrumb";
 import { PluginDetail } from "../components/plugin-detail";
 import { notFound } from "next/navigation";
 import PluginCard from "../../components/pluginCard";
-import { PLUGINS } from "@/lib/utils/constants";
 import Divider from "@/components/ui/divider";
 import Footer from "../../../../components/ui/footer";
 import Sidebar from "../../components/sidebar/index";
@@ -49,6 +49,10 @@ export async function generateMetadata({
 }
 
 export default async function PluginDetailPage({ params }: PluginPageProps) {
+  const session = await auth();
+
+  console.log(session?.user);
+
   const { slug } = await params;
   const slugValue = slug?.[0];
 
