@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils/cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSidebar } from "../../_hooks/use-sidebar";
+import { useSidebar } from "../../hooks/use-sidebar";
 import { useEffect } from "react";
 import { Category } from "@/lib/prisma/client";
 

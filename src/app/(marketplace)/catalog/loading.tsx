@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleteon";
-import PluginSkeleton from "../_components/plugin-skeleton";
+import PluginSkeleton from "../components/plugin-skeleton";
 
 export default function Loading() {
   return (

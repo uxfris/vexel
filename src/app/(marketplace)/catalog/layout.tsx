@@ -1,6 +1,6 @@
-import Sidebar from "../_components/sidebar/index";
-import Navbar from "../_components/navbar";
-import { SidebarProvider } from "../_hooks/use-sidebar";
+import Sidebar from "../components/sidebar/index";
+import Navbar from "../components/navbar";
+import { SidebarProvider } from "../hooks/use-sidebar";
 
 const CatalogLayout = ({ children }: { children: React.ReactNode }) => {
   return (
