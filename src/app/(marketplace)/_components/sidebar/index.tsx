@@ -1,4 +1,4 @@
-import SidebarContent from "./sidebarContent";
+import SidebarContent from "./sidebar-content";
 import { prisma } from "@/lib/db/prisma";
 
 export const revalidate = 86400; //24 cache

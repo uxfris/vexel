@@ -9,14 +9,14 @@ import {
   Store,
   XIcon,
 } from "lucide-react";
-import { useSidebar } from "../hooks/useSidebar";
+import { useSidebar } from "../_hooks/use-sidebar";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils/cn";
 import { useMedia } from "use-media";
 import Brand from "@/components/ui/brand";
 import { useModal } from "@/lib/hooks/useModal";
-import SearchPluginModal from "./searchPluginModal";
-import LoginModal from "@/components/shared/login";
+import SearchPluginModal from "./search-plugin-modal";
+import LoginModal from "@/components/shared/login-modal";
 import { useSession } from "next-auth/react";
 
 const Navbar = () => {

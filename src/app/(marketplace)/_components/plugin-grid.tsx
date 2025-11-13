@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import PluginSkeleton from "./pluginSkeleton";
-import PluginCard from "./pluginCard";
+import PluginSkeleton from "./plugin-skeleton";
+import PluginCard from "./plugin-card";
 
 export default function PluginGrid({
   initialPlugins,

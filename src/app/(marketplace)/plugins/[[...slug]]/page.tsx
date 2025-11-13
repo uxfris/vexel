@@ -1,11 +1,11 @@
 import { Metadata } from "next";
-import Breadcrumb from "../../components/breadcrumb";
+import Breadcrumb from "../../_components/breadcrumb";
 import { PluginDetail } from "../components/plugin-detail";
 import { notFound } from "next/navigation";
-import PluginCard from "../../components/pluginCard";
+import PluginCard from "../../_components/plugin-card";
 import Divider from "@/components/ui/divider";
 import Footer from "../../../../components/ui/footer";
-import Sidebar from "../../components/sidebar/index";
+import Sidebar from "../../_components/sidebar/index";
 import { prisma } from "@/lib/db/prisma";
 import { serializePlugin } from "@/lib/utils/serializePlugin";
 

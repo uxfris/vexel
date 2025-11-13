@@ -1,11 +1,11 @@
-import Header from "../../components/header";
+import Header from "../../_components/header";
 import { getPlugins } from "@/lib/db/getPlugins";
 import {
   normalizePricing,
   normalizeSort,
   normalizeSubcategories,
 } from "@/lib/utils/normalizeFilters";
-import PluginGrid from "../../components/pluginGrid";
+import PluginGrid from "../../_components/plugin-grid";
 
 export default async function CatalogPage({
   params,

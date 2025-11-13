@@ -1,5 +1,5 @@
-import Navbar from "../components/navbar";
-import { SidebarProvider } from "../hooks/useSidebar";
+import Navbar from "../_components/navbar";
+import { SidebarProvider } from "../_hooks/use-sidebar";
 
 const Plugin = ({ children }: { children: React.ReactNode }) => {
   return (
